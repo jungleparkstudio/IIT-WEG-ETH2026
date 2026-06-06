@@ -2,575 +2,1032 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IIT Training — Wegagen Bank Feedback Form | June 2026</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>IIT Training — Wegagen Bank Feedback | June 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  :root {
-    --ink: #1a1a1a;
-    --ink-soft: #555;
-    --ink-muted: #999;
-    --paper: #faf9f6;
-    --paper-card: #ffffff;
-    --rule: #e8e4dc;
-    --gold: #b8922a;
-    --gold-light: #f5edd8;
-    --gold-dark: #8a6c1e;
-  }
+:root {
+  --navy: #0d1b2a;
+  --navy-mid: #1a2f45;
+  --gold: #c9973a;
+  --gold-light: #f7f0e3;
+  --gold-dark: #9e7220;
+  --white: #ffffff;
+  --off-white: #fafaf8;
+  --gray-1: #f4f3f0;
+  --gray-2: #e8e6e1;
+  --gray-3: #b0aca3;
+  --gray-4: #6b6760;
+  --text: #1a1a1a;
+  --text-soft: #4a4845;
+  --text-muted: #8a8680;
+  --danger: #c0392b;
+  --success: #1a6b3c;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.10);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.13);
+}
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--paper);
-    color: var(--ink);
-    min-height: 100vh;
-    padding: 3rem 1rem 5rem;
-  }
+html { scroll-behavior: smooth; }
 
-  .page { max-width: 720px; margin: 0 auto; }
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--off-white);
+  color: var(--text);
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
 
-  .masthead {
-    text-align: center;
-    margin-bottom: 3rem;
-    position: relative;
-    padding-bottom: 2rem;
-  }
-  .masthead::after {
-    content: '';
-    display: block;
-    width: 60px;
-    height: 2px;
-    background: var(--gold);
-    margin: 1.5rem auto 0;
-  }
-  .masthead-eyebrow {
-    font-size: 11px;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--gold);
-    font-weight: 500;
-    margin-bottom: 0.75rem;
-  }
-  .masthead h1 {
-    font-family: 'DM Serif Display', serif;
-    font-size: clamp(26px, 5vw, 38px);
-    font-weight: 400;
-    line-height: 1.2;
-    color: var(--ink);
-  }
-  .masthead-sub {
-    font-size: 14px;
-    color: var(--ink-soft);
-    margin-top: 0.6rem;
-  }
+/* ── HERO HEADER ── */
+.hero {
+  background: var(--navy);
+  padding: 48px 24px 56px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -60px; left: -60px;
+  width: 220px; height: 220px;
+  border-radius: 50%;
+  border: 40px solid rgba(201,151,58,0.08);
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -80px; right: -40px;
+  width: 280px; height: 280px;
+  border-radius: 50%;
+  border: 50px solid rgba(201,151,58,0.06);
+}
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(201,151,58,0.15);
+  border: 1px solid rgba(201,151,58,0.3);
+  border-radius: 40px;
+  padding: 6px 16px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+}
+.hero-dot {
+  width: 5px; height: 5px;
+  background: var(--gold);
+  border-radius: 50%;
+}
+.hero h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(26px, 6vw, 42px);
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+.hero-sub {
+  font-size: 14px;
+  color: rgba(255,255,255,0.55);
+  font-weight: 300;
+  max-width: 340px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+.hero-wave {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 32px;
+  background: var(--off-white);
+  clip-path: ellipse(55% 100% at 50% 100%);
+}
 
-  .meta-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-bottom: 2rem;
-  }
-  .meta-grid .full { grid-column: 1 / -1; }
-  .field-group { display: flex; flex-direction: column; gap: 5px; }
-  .field-group label {
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--ink-muted);
-    font-weight: 500;
-  }
-  .field-group input {
-    border: none;
-    border-bottom: 1.5px solid var(--rule);
-    background: transparent;
-    padding: 8px 2px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 15px;
-    color: var(--ink);
-    outline: none;
-    transition: border-color 0.2s;
-    width: 100%;
-  }
-  .field-group input:focus { border-color: var(--gold); }
+/* ── PAGE WRAP ── */
+.page {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 16px 80px;
+}
 
-  .topic-pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 6px;
-  }
-  .topic-pill input[type="radio"] { display: none; }
-  .topic-pill label {
-    display: inline-block;
-    padding: 6px 14px;
-    border: 1px solid var(--rule);
-    border-radius: 20px;
-    font-size: 12.5px;
-    color: var(--ink-soft);
-    cursor: pointer;
-    transition: all 0.15s;
-    line-height: 1.4;
-  }
-  .topic-pill input[type="radio"]:checked + label {
-    background: var(--gold);
-    border-color: var(--gold);
-    color: #fff;
-  }
-  .topic-pill label:hover { border-color: var(--gold); color: var(--gold); }
+/* ── PROGRESS BAR ── */
+.progress-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--off-white);
+  padding: 12px 16px 10px;
+  border-bottom: 1px solid var(--gray-2);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.progress-track {
+  flex: 1;
+  height: 4px;
+  background: var(--gray-2);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold-dark), var(--gold));
+  border-radius: 4px;
+  width: 0%;
+  transition: width 0.4s ease;
+}
+.progress-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--gold-dark);
+  min-width: 36px;
+  text-align: right;
+}
 
-  .section-card {
-    background: var(--paper-card);
-    border: 1px solid var(--rule);
-    border-radius: 2px;
-    margin-bottom: 1.25rem;
-    overflow: hidden;
-    animation: fadeUp 0.4s ease both;
-  }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(12px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .section-card:nth-child(1) { animation-delay: 0.05s; }
-  .section-card:nth-child(2) { animation-delay: 0.1s; }
-  .section-card:nth-child(3) { animation-delay: 0.15s; }
-  .section-card:nth-child(4) { animation-delay: 0.2s; }
-  .section-card:nth-child(5) { animation-delay: 0.25s; }
+/* ── META CARD ── */
+.meta-card {
+  background: var(--white);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--gray-2);
+  padding: 20px;
+  margin: 20px 0 16px;
+  box-shadow: var(--shadow-sm);
+}
+.meta-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.meta-row.full { grid-template-columns: 1fr; }
+.field-wrap { display: flex; flex-direction: column; gap: 6px; }
+.field-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.field-label span { color: var(--gold); }
+.field-input {
+  border: 1.5px solid var(--gray-2);
+  border-radius: var(--radius-sm);
+  background: var(--gray-1);
+  padding: 12px 14px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  width: 100%;
+  -webkit-appearance: none;
+}
+.field-input:focus {
+  border-color: var(--gold);
+  background: var(--white);
+  box-shadow: 0 0 0 3px rgba(201,151,58,0.12);
+}
+.field-input::placeholder { color: var(--gray-3); }
 
-  .section-head {
-    padding: 1rem 1.5rem;
-    border-bottom: 1px solid var(--rule);
-    display: flex;
-    align-items: baseline;
-    gap: 12px;
-    background: var(--paper);
-  }
-  .section-num {
-    font-family: 'DM Serif Display', serif;
-    font-size: 28px;
-    color: var(--gold);
-    line-height: 1;
-    min-width: 28px;
-  }
-  .section-title {
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.05em;
-    color: var(--ink);
-  }
+/* ── TOPIC PILLS ── */
+.topic-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 4px;
+}
+.topic-pill input[type="radio"] { display: none; }
+.topic-pill label {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1.5px solid var(--gray-2);
+  border-radius: var(--radius-sm);
+  background: var(--gray-1);
+  cursor: pointer;
+  transition: all 0.18s;
+  font-size: 12.5px;
+  font-weight: 400;
+  color: var(--text-soft);
+  line-height: 1.4;
+  min-height: 52px;
+}
+.topic-pill label .pill-num {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--gold-dark);
+  background: var(--gold-light);
+  border-radius: 4px;
+  padding: 2px 5px;
+  min-width: 18px;
+  text-align: center;
+  margin-top: 1px;
+  flex-shrink: 0;
+}
+.topic-pill input[type="radio"]:checked + label {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: var(--white);
+}
+.topic-pill input[type="radio"]:checked + label .pill-num {
+  background: rgba(201,151,58,0.25);
+  color: var(--gold);
+}
+.topic-pill label:hover {
+  border-color: var(--gold);
+  background: var(--gold-light);
+}
 
-  .rating-wrap { padding: 0; }
-  .rating-table { width: 100%; border-collapse: collapse; }
-  .rating-table thead th {
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--ink-muted);
-    letter-spacing: 0.08em;
-    padding: 10px 8px;
-    text-align: center;
-    border-bottom: 1px solid var(--rule);
-  }
-  .rating-table thead th:first-child { text-align: left; padding-left: 1.5rem; }
-  .rating-table thead th:last-child { padding-right: 1.5rem; }
-  .rating-table tbody tr { transition: background 0.15s; }
-  .rating-table tbody tr:hover { background: var(--gold-light); }
-  .rating-table tbody td {
-    padding: 12px 8px;
-    border-bottom: 1px solid var(--rule);
-    font-size: 13.5px;
-    color: var(--ink-soft);
-    text-align: center;
-    vertical-align: middle;
-  }
-  .rating-table tbody tr:last-child td { border-bottom: none; }
-  .rating-table tbody td:first-child {
-    text-align: left;
-    padding-left: 1.5rem;
-    color: var(--ink);
-    font-size: 13px;
-    line-height: 1.45;
-  }
-  .rating-table tbody td:last-child { padding-right: 1.5rem; }
+/* ── SECTION CARDS ── */
+.section-card {
+  background: var(--white);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--gray-2);
+  margin-bottom: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  animation: slideUp 0.45s ease both;
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.section-card:nth-child(1) { animation-delay: 0.05s; }
+.section-card:nth-child(2) { animation-delay: 0.12s; }
+.section-card:nth-child(3) { animation-delay: 0.19s; }
+.section-card:nth-child(4) { animation-delay: 0.26s; }
+.section-card:nth-child(5) { animation-delay: 0.33s; }
 
-  .radio-cell { position: relative; }
-  .radio-cell input[type="radio"] { display: none; }
-  .radio-cell label {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 28px;
-    height: 28px;
-    border: 1.5px solid var(--rule);
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--ink-muted);
-    transition: all 0.15s;
-  }
-  .radio-cell input[type="radio"]:checked + label {
-    background: var(--gold);
-    border-color: var(--gold);
-    color: #fff;
-  }
-  .radio-cell label:hover { border-color: var(--gold); color: var(--gold); }
+.section-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  background: var(--navy);
+  border-bottom: 3px solid var(--gold);
+}
+.section-badge {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: var(--gold);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--navy);
+  flex-shrink: 0;
+}
+.section-title {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--white);
+  text-transform: uppercase;
+}
 
-  .scale-legend {
-    display: flex;
-    justify-content: space-between;
-    padding: 6px 1.5rem 10px;
-    font-size: 10px;
-    color: var(--ink-muted);
-    letter-spacing: 0.06em;
-    border-top: 1px dashed var(--rule);
-  }
+/* ── RATING ROWS ── */
+.rating-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--gray-1);
+  transition: background 0.15s;
+}
+.rating-item:last-of-type { border-bottom: none; }
+.rating-item:hover { background: var(--gray-1); }
+.rating-text {
+  font-size: 13px;
+  color: var(--text-soft);
+  line-height: 1.45;
+  flex: 1;
+  min-width: 0;
+}
+.rating-stars {
+  display: flex;
+  gap: 5px;
+  flex-shrink: 0;
+}
+.star-cell input[type="radio"] { display: none; }
+.star-cell label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1.5px solid var(--gray-2);
+  background: var(--gray-1);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gray-3);
+  transition: all 0.15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.star-cell input[type="radio"]:checked + label {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: var(--white);
+  transform: scale(1.08);
+  box-shadow: 0 2px 8px rgba(201,151,58,0.4);
+}
+.star-cell label:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  background: var(--gold-light);
+}
+.scale-bar {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 18px 10px;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  border-top: 1px dashed var(--gray-2);
+}
 
-  .open-section { padding: 1.25rem 1.5rem; }
-  .open-q { margin-bottom: 1.25rem; }
-  .open-q:last-child { margin-bottom: 0; }
-  .open-q p { font-size: 13px; color: var(--ink); margin-bottom: 8px; line-height: 1.5; }
-  .open-q textarea {
-    width: 100%;
-    border: 1px solid var(--rule);
-    border-radius: 2px;
-    padding: 10px 12px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    color: var(--ink);
-    background: var(--paper);
-    resize: vertical;
-    min-height: 80px;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  .open-q textarea:focus { border-color: var(--gold); }
+/* ── OPEN FEEDBACK ── */
+.open-body { padding: 16px 18px; display: flex; flex-direction: column; gap: 16px; }
+.open-q label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+.open-q label span { color: var(--gold); }
+.open-q textarea {
+  width: 100%;
+  border: 1.5px solid var(--gray-2);
+  border-radius: var(--radius-sm);
+  background: var(--gray-1);
+  padding: 12px 14px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  color: var(--text);
+  resize: vertical;
+  min-height: 90px;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  -webkit-appearance: none;
+}
+.open-q textarea:focus {
+  border-color: var(--gold);
+  background: var(--white);
+  box-shadow: 0 0 0 3px rgba(201,151,58,0.12);
+}
+.open-q textarea::placeholder { color: var(--gray-3); }
 
-  .submit-area {
-    margin-top: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-  }
-  .btn-submit {
-    background: var(--gold);
-    color: #fff;
-    border: none;
-    padding: 14px 48px;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    cursor: pointer;
-    border-radius: 2px;
-    transition: background 0.2s, transform 0.1s;
-  }
-  .btn-submit:hover { background: var(--gold-dark); }
-  .btn-submit:active { transform: scale(0.98); }
-  .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
-  .btn-reset {
-    background: none;
-    border: none;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 12px;
-    color: var(--ink-muted);
-    cursor: pointer;
-    letter-spacing: 0.06em;
-    text-decoration: underline;
-    padding: 4px;
-  }
+/* ── ERROR ── */
+.error-banner {
+  display: none;
+  background: #fdf0ef;
+  border: 1px solid #e8b4b0;
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--danger);
+  margin-top: 8px;
+  font-weight: 500;
+}
 
-  #confirm-msg {
-    display: none;
-    text-align: center;
-    padding: 2.5rem 2rem;
-    background: var(--gold-light);
-    border: 1px solid var(--gold);
-    border-radius: 2px;
-    margin-top: 1rem;
-  }
-  #confirm-msg h2 {
-    font-family: 'DM Serif Display', serif;
-    font-size: 26px;
-    font-weight: 400;
-    color: var(--gold-dark);
-    margin-bottom: 0.5rem;
-  }
-  #confirm-msg .conf-code {
-    font-size: 36px;
-    font-weight: 500;
-    letter-spacing: 0.15em;
-    color: var(--gold-dark);
-    margin: 1rem 0;
-    font-family: 'DM Serif Display', serif;
-  }
-  #confirm-msg p { font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
-  #confirm-msg .gift-note {
-    margin-top: 1rem;
-    padding: 0.75rem 1rem;
-    background: var(--gold);
-    color: #fff;
-    border-radius: 2px;
-    font-size: 14px;
-    font-weight: 500;
-  }
+/* ── SUBMIT BUTTON ── */
+.submit-wrap {
+  padding: 8px 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+}
+.btn-submit {
+  background: var(--navy);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 18px 24px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn-submit::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--gold);
+}
+.btn-submit:hover { background: var(--navy-mid); box-shadow: var(--shadow-lg); }
+.btn-submit:active { transform: scale(0.98); }
+.btn-submit:disabled { opacity: 0.55; cursor: not-allowed; transform: none; }
+.btn-reset {
+  background: none;
+  border: none;
+  font-family: 'Outfit', sans-serif;
+  font-size: 13px;
+  color: var(--text-muted);
+  cursor: pointer;
+  text-align: center;
+  padding: 4px;
+  text-decoration: underline;
+  -webkit-tap-highlight-color: transparent;
+}
 
-  .error-msg {
-    color: #c0392b;
-    font-size: 12px;
-    margin-top: 4px;
-    display: none;
-  }
+/* ── CONFIRMATION ── */
+#confirm-screen {
+  display: none;
+  text-align: center;
+  padding: 40px 24px;
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--gray-2);
+  box-shadow: var(--shadow-lg);
+  margin-top: 20px;
+  animation: popIn 0.4s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+.confirm-icon {
+  width: 64px; height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--navy), var(--navy-mid));
+  display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 20px;
+  border: 3px solid var(--gold);
+}
+.confirm-icon svg { width: 28px; height: 28px; }
+#confirm-screen h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+#confirm-screen .conf-sub {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 24px;
+}
+.gift-box {
+  background: var(--navy);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+.gift-box .gift-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 8px;
+}
+.gift-box .gift-code {
+  font-family: 'Playfair Display', serif;
+  font-size: 38px;
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: 0.2em;
+}
+.gift-note {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.7);
+  margin-top: 8px;
+}
+.pdf-btn {
+  width: 100%;
+  background: var(--gold);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 15px 24px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.03em;
+  transition: background 0.2s;
+  -webkit-tap-highlight-color: transparent;
+}
+.pdf-btn:hover { background: var(--gold-dark); }
 
-  @media (max-width: 520px) {
-    .meta-grid { grid-template-columns: 1fr; }
-    .rating-table thead th, .rating-table tbody td { padding: 10px 4px; }
-    .rating-table tbody td:first-child { padding-left: 1rem; font-size: 12px; }
-    .radio-cell label { width: 24px; height: 24px; font-size: 11px; }
-  }
+/* ── MOBILE SPECIFIC ── */
+@media (max-width: 480px) {
+  .hero { padding: 36px 20px 48px; }
+  .meta-row { grid-template-columns: 1fr; }
+  .topic-grid { grid-template-columns: 1fr; }
+  .rating-item { flex-direction: column; align-items: flex-start; gap: 10px; }
+  .rating-stars { gap: 6px; }
+  .star-cell label { width: 36px; height: 36px; font-size: 13px; }
+  .meta-card, .section-card { border-radius: var(--radius-sm); }
+  .btn-submit { padding: 16px; font-size: 14px; }
+}
 
-  @media print {
-    body { background: #fff; padding: 1rem; }
-    .btn-submit, .btn-reset { display: none; }
-    .section-card { break-inside: avoid; }
-  }
+@media print {
+  .progress-wrap, .btn-submit, .btn-reset, .pdf-btn { display: none; }
+  .hero { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+}
 </style>
 </head>
 <body>
-<div class="page">
 
-  <div class="masthead">
-    <p class="masthead-eyebrow">Wegagen Bank &nbsp;·&nbsp; IIT Training &nbsp;·&nbsp; June 2026</p>
-    <h1>Participant Feedback Form</h1>
-    <p class="masthead-sub">Please complete all fields — your feedback helps improve future sessions.</p>
+<div class="hero">
+  <div class="hero-eyebrow">
+    <span class="hero-dot"></span>
+    Wegagen Bank &nbsp;·&nbsp; IIT Training &nbsp;·&nbsp; June 2026
+    <span class="hero-dot"></span>
   </div>
+  <h1>Participant<br>Feedback Form</h1>
+  <p class="hero-sub">All fields marked with * are required. Your honest feedback improves future sessions.</p>
+  <div class="hero-wave"></div>
+</div>
 
-  <form id="feedback-form" onsubmit="handleSubmit(event)">
+<div class="progress-wrap">
+  <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+  <div class="progress-label" id="progress-label">0%</div>
+</div>
+
+<div class="page">
+  <form id="feedback-form" onsubmit="handleSubmit(event)" novalidate>
 
     <input type="hidden" name="access_key" value="ce8d6658-2d34-4f30-8667-6e1fccc1f7f1">
     <input type="hidden" name="subject" value="Wegagen IIT Training — New Feedback Submission">
     <input type="hidden" name="from_name" value="Wegagen IIT Feedback Form">
 
     <!-- Meta -->
-    <div class="meta-grid">
-      <div class="field-group">
-        <label>Date *</label>
-        <input type="date" name="date" id="f-date" required>
-      </div>
-      <div class="field-group">
-        <label>Trainer(s) *</label>
-        <input type="text" name="trainer" placeholder="Trainer name(s)" required>
-      </div>
-      <div class="field-group full">
-        <label>Participant Name (Optional)</label>
-        <input type="text" name="participant" placeholder="Your name">
-      </div>
-      <div class="field-group full">
-        <label>Training Topic *</label>
-        <div class="topic-pills" id="topic-pills">
-          <div class="topic-pill"><input type="radio" name="topic" id="t1" value="1. Treasury Product Development" required><label for="t1">1. Treasury Product Development</label></div>
-          <div class="topic-pill"><input type="radio" name="topic" id="t2" value="2. FX Trading"><label for="t2">2. FX Trading</label></div>
-          <div class="topic-pill"><input type="radio" name="topic" id="t3" value="3. Derivatives and Hedge Strategies"><label for="t3">3. Derivatives &amp; Hedge Strategies</label></div>
-          <div class="topic-pill"><input type="radio" name="topic" id="t4" value="4. Operational Risk Management"><label for="t4">4. Operational Risk Management</label></div>
-          <div class="topic-pill"><input type="radio" name="topic" id="t5" value="5. Advanced NPL"><label for="t5">5. Advanced NPL</label></div>
-          <div class="topic-pill"><input type="radio" name="topic" id="t6" value="6. Sales and Revenue Growth"><label for="t6">6. Sales &amp; Revenue Growth</label></div>
-          <div class="topic-pill"><input type="radio" name="topic" id="t7" value="7. Talent Management"><label for="t7">7. Talent Management</label></div>
-          <div class="topic-pill"><input type="radio" name="topic" id="t8" value="8. Digital Transformation in Banking"><label for="t8">8. Digital Transformation in Banking</label></div>
+    <div class="meta-card">
+      <div class="meta-row" style="margin-bottom:16px;">
+        <div class="field-wrap">
+          <div class="field-label">Date <span>*</span></div>
+          <input class="field-input" type="date" name="date" id="f-date" required>
         </div>
-        <span class="error-msg" id="topic-error">Please select a training topic.</span>
+        <div class="field-wrap">
+          <div class="field-label">Trainer(s) <span>*</span></div>
+          <input class="field-input" type="text" name="trainer" placeholder="Trainer name(s)" required>
+        </div>
+      </div>
+      <div class="meta-row full" style="margin-bottom:16px;">
+        <div class="field-wrap">
+          <div class="field-label">Participant Name</div>
+          <input class="field-input" type="text" name="participant" placeholder="Your name (optional)">
+        </div>
+      </div>
+      <div class="meta-row full">
+        <div class="field-wrap">
+          <div class="field-label">Training Topic <span>*</span></div>
+          <div class="topic-grid" id="topic-grid">
+            <div class="topic-pill"><input type="radio" name="topic" id="t1" value="1. Treasury Product Development" required><label for="t1"><span class="pill-num">1</span>Treasury Product Development</label></div>
+            <div class="topic-pill"><input type="radio" name="topic" id="t2" value="2. FX Trading"><label for="t2"><span class="pill-num">2</span>FX Trading</label></div>
+            <div class="topic-pill"><input type="radio" name="topic" id="t3" value="3. Derivatives and Hedge Strategies"><label for="t3"><span class="pill-num">3</span>Derivatives &amp; Hedge Strategies</label></div>
+            <div class="topic-pill"><input type="radio" name="topic" id="t4" value="4. Operational Risk Management"><label for="t4"><span class="pill-num">4</span>Operational Risk Management</label></div>
+            <div class="topic-pill"><input type="radio" name="topic" id="t5" value="5. Advanced NPL"><label for="t5"><span class="pill-num">5</span>Advanced NPL</label></div>
+            <div class="topic-pill"><input type="radio" name="topic" id="t6" value="6. Sales and Revenue Growth"><label for="t6"><span class="pill-num">6</span>Sales &amp; Revenue Growth</label></div>
+            <div class="topic-pill"><input type="radio" name="topic" id="t7" value="7. Talent Management"><label for="t7"><span class="pill-num">7</span>Talent Management</label></div>
+            <div class="topic-pill"><input type="radio" name="topic" id="t8" value="8. Digital Transformation in Banking"><label for="t8"><span class="pill-num">8</span>Digital Transformation in Banking</label></div>
+          </div>
+          <div class="error-banner" id="topic-error">Please select a training topic to continue.</div>
+        </div>
       </div>
     </div>
 
-    <!-- Section 1 -->
-    <div class="section-card">
-      <div class="section-head">
-        <span class="section-num">1</span>
-        <span class="section-title">Training Content</span>
-      </div>
-      <div class="rating-wrap" id="s1-wrap"></div>
-      <div class="scale-legend"><span>1 — Poor</span><span>5 — Excellent</span></div>
-    </div>
+    <!-- Sections built by JS -->
+    <div id="sections-wrap"></div>
 
-    <!-- Section 2 -->
+    <!-- Open Feedback -->
     <div class="section-card">
       <div class="section-head">
-        <span class="section-num">2</span>
-        <span class="section-title">Trainer Evaluation</span>
+        <div class="section-badge">5</div>
+        <div class="section-title">Open Feedback</div>
       </div>
-      <div class="rating-wrap" id="s2-wrap"></div>
-      <div class="scale-legend"><span>1 — Poor</span><span>5 — Excellent</span></div>
-    </div>
-
-    <!-- Section 3 -->
-    <div class="section-card">
-      <div class="section-head">
-        <span class="section-num">3</span>
-        <span class="section-title">Training Experience</span>
-      </div>
-      <div class="rating-wrap" id="s3-wrap"></div>
-      <div class="scale-legend"><span>1 — Poor</span><span>5 — Excellent</span></div>
-    </div>
-
-    <!-- Section 4 -->
-    <div class="section-card">
-      <div class="section-head">
-        <span class="section-num">4</span>
-        <span class="section-title">Overall Impression</span>
-      </div>
-      <div class="rating-wrap" id="s4-wrap"></div>
-      <div class="scale-legend"><span>1 — Strongly Disagree</span><span>5 — Strongly Agree</span></div>
-    </div>
-
-    <!-- Section 5 -->
-    <div class="section-card">
-      <div class="section-head">
-        <span class="section-num">5</span>
-        <span class="section-title">Open Feedback</span>
-      </div>
-      <div class="open-section">
+      <div class="open-body">
         <div class="open-q">
-          <p>What did you find most helpful about the trainer's delivery style? *</p>
+          <label>What did you find most helpful about the trainer's delivery style? <span>*</span></label>
           <textarea name="q_helpful" placeholder="Share your thoughts…" required></textarea>
         </div>
         <div class="open-q">
-          <p>What could the trainer improve or do differently in future sessions? *</p>
+          <label>What could the trainer improve or do differently in future sessions? <span>*</span></label>
           <textarea name="q_improve" placeholder="Any suggestions…" required></textarea>
         </div>
         <div class="open-q">
-          <p>Any suggestions for improving the training overall? *</p>
+          <label>Any suggestions for improving the training overall? <span>*</span></label>
           <textarea name="q_suggest" placeholder="General feedback…" required></textarea>
         </div>
       </div>
     </div>
 
-    <div class="submit-area">
-      <button type="submit" class="btn-submit" id="submit-btn">Submit Feedback</button>
+    <div class="submit-wrap">
+      <div class="error-banner" id="general-error">Please complete all required fields before submitting.</div>
+      <button type="submit" class="btn-submit" id="submit-btn">Submit Feedback &rarr;</button>
       <button type="button" class="btn-reset" onclick="resetForm()">Clear all fields</button>
     </div>
 
-    <div id="confirm-msg">
-      <h2>Thank you!</h2>
-      <p>Your feedback has been submitted successfully.</p>
-      <div class="conf-code" id="conf-code"></div>
-      <div class="gift-note">Show this code at the desk to collect your gift bag</div>
-      <p style="margin-top:1rem; font-size:13px;">Your response has been emailed to the training team.</p>
+    <div id="confirm-screen">
+      <div class="confirm-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#c9973a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+      <h2>Thank You!</h2>
+      <p class="conf-sub">Your feedback has been submitted and emailed to the training team.</p>
+      <div class="gift-box">
+        <div class="gift-label">Your Gift Bag Code</div>
+        <div class="gift-code" id="conf-code">----</div>
+        <div class="gift-note">Show this screen at the registration desk to collect your gift bag</div>
+      </div>
+      <button type="button" class="pdf-btn" onclick="downloadPDF()" id="pdf-btn">Download PDF Receipt</button>
     </div>
 
   </form>
 </div>
 
 <script>
-const sections = {
-  s1: [
-    "The objectives of the training were clear.",
-    "The content was relevant and practical.",
-    "The training addressed real-world challenges.",
-    "The supporting materials (slides, handouts) were helpful."
-  ],
-  s2: [
-    "Demonstrated deep knowledge of the subject.",
-    "Explained complex concepts in an understandable way.",
-    "Was engaging and encouraged participation.",
-    "Managed time effectively during the sessions.",
-    "Was approachable and responsive to questions.",
-    "Created a comfortable and respectful learning environment."
-  ],
-  s3: [
-    "The venue and setup supported effective learning.",
-    "Group activities and discussions were valuable.",
-    "The pace and duration of the training were appropriate."
-  ],
-  s4: [
-    "I feel more confident in executing strategy after this training.",
-    "I would recommend this trainer and session to others."
-  ]
-};
+var formSnapshot = {};
 
-Object.entries(sections).forEach(function(entry) {
-  var id = entry[0];
-  var items = entry[1];
-  var wrap = document.getElementById(id + '-wrap');
-  var table = document.createElement('table');
-  table.className = 'rating-table';
-  table.innerHTML = '<thead><tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead><tbody></tbody>';
-  var tbody = table.querySelector('tbody');
-  items.forEach(function(label, ri) {
-    var tr = document.createElement('tr');
-    var html = '<td>' + label + '</td>';
+var ratingSections = [
+  {
+    id: 's1', num: '1', title: 'Training Content',
+    scaleMin: '1 — Poor', scaleMax: '5 — Excellent',
+    items: [
+      'The objectives of the training were clear.',
+      'The content was relevant and practical.',
+      'The training addressed real-world challenges.',
+      'The supporting materials (slides, handouts) were helpful.'
+    ]
+  },
+  {
+    id: 's2', num: '2', title: 'Trainer Evaluation',
+    scaleMin: '1 — Poor', scaleMax: '5 — Excellent',
+    items: [
+      'Demonstrated deep knowledge of the subject.',
+      'Explained complex concepts in an understandable way.',
+      'Was engaging and encouraged participation.',
+      'Managed time effectively during the sessions.',
+      'Was approachable and responsive to questions.',
+      'Created a comfortable and respectful learning environment.'
+    ]
+  },
+  {
+    id: 's3', num: '3', title: 'Training Experience',
+    scaleMin: '1 — Poor', scaleMax: '5 — Excellent',
+    items: [
+      'The venue and setup supported effective learning.',
+      'Group activities and discussions were valuable.',
+      'The pace and duration of the training were appropriate.'
+    ]
+  },
+  {
+    id: 's4', num: '4', title: 'Overall Impression',
+    scaleMin: '1 — Strongly Disagree', scaleMax: '5 — Strongly Agree',
+    items: [
+      'I feel more confident in executing strategy after this training.',
+      'I would recommend this trainer and session to others.'
+    ]
+  }
+];
+
+var wrap = document.getElementById('sections-wrap');
+ratingSections.forEach(function(sec) {
+  var card = document.createElement('div');
+  card.className = 'section-card';
+  var head = '<div class="section-head"><div class="section-badge">' + sec.num + '</div><div class="section-title">' + sec.title + '</div></div>';
+  var body = '';
+  sec.items.forEach(function(item, ri) {
+    var stars = '';
     for (var v = 1; v <= 5; v++) {
-      var uid = id + '_r' + ri + '_v' + v;
-      var fname = id + '_r' + ri;
-      html += '<td class="radio-cell"><input type="radio" name="' + fname + '" id="' + uid + '" value="' + v + '" required><label for="' + uid + '">' + v + '</label></td>';
+      var uid = sec.id + '_r' + ri + '_v' + v;
+      stars += '<div class="star-cell"><input type="radio" name="' + sec.id + '_r' + ri + '" id="' + uid + '" value="' + v + '" required><label for="' + uid + '">' + v + '</label></div>';
     }
-    tr.innerHTML = html;
-    tbody.appendChild(tr);
+    body += '<div class="rating-item"><div class="rating-text">' + item + '</div><div class="rating-stars">' + stars + '</div></div>';
   });
-  wrap.appendChild(table);
+  var scale = '<div class="scale-bar"><span>' + sec.scaleMin + '</span><span>' + sec.scaleMax + '</span></div>';
+  card.innerHTML = head + body + scale;
+  wrap.appendChild(card);
 });
 
 document.getElementById('f-date').valueAsDate = new Date();
 
+// Progress tracking
+var allRequired = [];
+function updateProgress() {
+  var form = document.getElementById('feedback-form');
+  var radios = {};
+  var total = 0; var filled = 0;
+  // date, trainer
+  var date = form.querySelector('[name="date"]');
+  var trainer = form.querySelector('[name="trainer"]');
+  total += 2;
+  if (date && date.value) filled++;
+  if (trainer && trainer.value.trim()) filled++;
+  // topic
+  total++;
+  if (form.querySelector('input[name="topic"]:checked')) filled++;
+  // rating radios
+  var rGroups = {};
+  form.querySelectorAll('.star-cell input[type="radio"]').forEach(function(r) { rGroups[r.name] = rGroups[r.name] || []; rGroups[r.name].push(r); });
+  Object.keys(rGroups).forEach(function(g) {
+    total++;
+    if (rGroups[g].some(function(r) { return r.checked; })) filled++;
+  });
+  // textareas
+  form.querySelectorAll('textarea[required]').forEach(function(t) {
+    total++;
+    if (t.value.trim().length > 10) filled++;
+  });
+  var pct = Math.round((filled / total) * 100);
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-label').textContent = pct + '%';
+}
+
+document.getElementById('feedback-form').addEventListener('change', updateProgress);
+document.getElementById('feedback-form').addEventListener('input', updateProgress);
+
 function generateCode() {
   var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
   var code = 'WB-';
-  for (var i = 0; i < 4; i++) {
-    code += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
+  for (var i = 0; i < 4; i++) code += chars.charAt(Math.floor(Math.random() * chars.length));
   return code;
+}
+
+function collectSnapshot() {
+  var form = document.getElementById('feedback-form');
+  var snap = {};
+  snap.date = form.querySelector('[name="date"]').value;
+  snap.trainer = form.querySelector('[name="trainer"]').value;
+  snap.participant = form.querySelector('[name="participant"]').value || 'Anonymous';
+  var topicEl = form.querySelector('input[name="topic"]:checked');
+  snap.topic = topicEl ? topicEl.value : '';
+  ratingSections.forEach(function(sec) {
+    snap[sec.id] = {};
+    sec.items.forEach(function(item, ri) {
+      var checked = form.querySelector('input[name="' + sec.id + '_r' + ri + '"]:checked');
+      snap[sec.id][ri] = { label: item, val: checked ? checked.value : '-' };
+    });
+  });
+  snap.q_helpful = form.querySelector('[name="q_helpful"]').value;
+  snap.q_improve = form.querySelector('[name="q_improve"]').value;
+  snap.q_suggest = form.querySelector('[name="q_suggest"]').value;
+  return snap;
 }
 
 async function handleSubmit(e) {
   e.preventDefault();
+  var form = document.getElementById('feedback-form');
 
-  var topicSelected = document.querySelector('input[name="topic"]:checked');
-  if (!topicSelected) {
+  // validate topic
+  var topicOk = form.querySelector('input[name="topic"]:checked');
+  if (!topicOk) {
     document.getElementById('topic-error').style.display = 'block';
-    document.getElementById('topic-pills').scrollIntoView({ behavior: 'smooth' });
+    document.getElementById('topic-grid').scrollIntoView({ behavior: 'smooth', block: 'center' });
     return;
   }
   document.getElementById('topic-error').style.display = 'none';
 
+  // validate all required
+  var invalid = false;
+  form.querySelectorAll('[required]').forEach(function(el) {
+    if (el.type === 'radio') return;
+    if (!el.value.trim()) { invalid = true; el.focus(); }
+  });
+  // check radio groups
+  var rGroups = {};
+  form.querySelectorAll('.star-cell input[type="radio"]').forEach(function(r) { rGroups[r.name] = rGroups[r.name] || false; if (r.checked) rGroups[r.name] = true; });
+  Object.values(rGroups).forEach(function(v) { if (!v) invalid = true; });
+
+  if (invalid) {
+    document.getElementById('general-error').style.display = 'block';
+    return;
+  }
+  document.getElementById('general-error').style.display = 'none';
+
+  formSnapshot = collectSnapshot();
+
   var btn = document.getElementById('submit-btn');
   btn.disabled = true;
-  btn.textContent = 'Submitting...';
+  btn.textContent = 'Submitting…';
 
-  var form = document.getElementById('feedback-form');
-  var formData = new FormData(form);
+  var fd = new FormData(form);
   var code = generateCode();
-  formData.append('confirmation_code', code);
+  fd.append('confirmation_code', code);
 
   try {
-    var response = await fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      body: formData
-    });
-    var result = await response.json();
+    var res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: fd });
+    var result = await res.json();
     if (result.success) {
       document.getElementById('conf-code').textContent = code;
-      document.getElementById('confirm-msg').style.display = 'block';
-      document.querySelector('.submit-area').style.display = 'none';
-      document.getElementById('confirm-msg').scrollIntoView({ behavior: 'smooth' });
+      formSnapshot.code = code;
+      document.querySelector('.submit-wrap').style.display = 'none';
+      // hide all section cards
+      document.querySelectorAll('.section-card, .meta-card').forEach(function(c) { c.style.display = 'none'; });
+      document.getElementById('confirm-screen').style.display = 'block';
+      document.getElementById('confirm-screen').scrollIntoView({ behavior: 'smooth' });
+      document.getElementById('progress-fill').style.width = '100%';
+      document.getElementById('progress-label').textContent = '100%';
     } else {
-      btn.disabled = false;
-      btn.textContent = 'Submit Feedback';
+      btn.disabled = false; btn.textContent = 'Submit Feedback →';
       alert('Submission failed. Please try again.');
     }
-  } catch (err) {
-    btn.disabled = false;
-    btn.textContent = 'Submit Feedback';
+  } catch(err) {
+    btn.disabled = false; btn.textContent = 'Submit Feedback →';
     alert('Network error. Please check your connection and try again.');
   }
+}
+
+function downloadPDF() {
+  var btn = document.getElementById('pdf-btn');
+  btn.textContent = 'Generating PDF…';
+  btn.disabled = true;
+
+  try {
+    var doc = new jspdf.jsPDF({ orientation: 'p', unit: 'mm', format: 'a4' });
+    var pageW = 210; var margin = 18; var contentW = pageW - margin * 2;
+    var y = 0;
+
+    function checkPage(needed) {
+      if (y + needed > 275) { doc.addPage(); y = 20; }
+    }
+
+    // Header bar
+    doc.setFillColor(13, 27, 42);
+    doc.rect(0, 0, 210, 36, 'F');
+    doc.setFillColor(201, 151, 58);
+    doc.rect(0, 36, 210, 2, 'F');
+
+    doc.setTextColor(201, 151, 58);
+    doc.setFontSize(9);
+    doc.setFont('helvetica', 'bold');
+    doc.text('WEGAGEN BANK  ·  IIT TRAINING  ·  JUNE 2026', margin, 14);
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(18);
+    doc.text('Participant Feedback Form', margin, 28);
+    y = 50;
+
+    // Confirmation code box
+    doc.setFillColor(247, 240, 227);
+    doc.roundedRect(margin, y, contentW, 22, 3, 3, 'F');
+    doc.setTextColor(158, 114, 32);
+    doc.setFontSize(9);
+    doc.setFont('helvetica', 'bold');
+    doc.text('GIFT BAG CONFIRMATION CODE', margin + 8, y + 8);
+    doc.setFontSize(16);
+    doc.text(formSnapshot.code || '----', margin + 8, y + 18);
+    y += 30;
+
+    // Meta info
+    doc.setFillColor(244, 243, 240);
+    doc.roundedRect(margin, y, contentW, 28, 2, 2, 'F');
+    doc.setTextColor(106, 103, 96);
+    doc.setFontSize(8);
+    doc.setFont('helvetica', 'normal');
+    doc.text('DATE', margin + 6, y + 8);
+    doc.text('TRAINER', margin + 50, y + 8);
+    doc.text('PARTICIPANT', margin + 110, y + 8);
+    doc.setTextColor(26, 26, 26);
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'bold');
+    doc.text(formSnapshot.date || '-', margin + 6, y + 17);
+    doc.text(formSnapshot.trainer || '-', margin + 50, y + 17);
+    doc.text(formSnapshot.participant || 'Anonymous', margin + 110, y + 17);
+    y += 36;
+
+    // Topic
+    doc.setFillColor(13, 27, 42);
+    doc.roundedRect(margin, y, contentW, 14, 2, 2, 'F');
+    doc.setTextColor(201, 151, 58);
+    doc.setFontSize(8);
+    doc.setFont('helvetica', 'bold');
+    doc.text('TRAINING TOPIC', margin + 6, y + 6);
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(9);
+    doc.text(formSnapshot.topic || '-', margin + 6, y + 11.5);
+    y += 22;
+
+    var sectionLabels = {
+      s1: 'Section 1: Training Content',
+      s2: 'Section 2: Trainer Evaluation',
+      s3: 'Section 3: Training Experience',
+      s4: 'Section 4: Overall Impression'
+    };
+
+    ratingSections.forEach(function(sec) {
+      checkPage(20);
+      doc.setFillColor(13, 27, 42);
+      doc.rect(margin, y, contentW, 10, 'F');
+      doc.setFillColor(201, 151, 58);
+      doc.rect(margin, y + 10, contentW, 1, 'F');
+      doc.setTextColor(255, 255, 255);
+      doc.setFontSize(9);
+      doc.setFont('helvetica', 'bold');
+      doc.text(sectionLabels[sec.id].toUpperCase(), margin + 6, y + 7);
+      y += 14;
+
+      sec.items.forEach(function(item, ri) {
+        checkPage(10);
+        var rating = formSnapshot[sec.id][ri].val;
+        doc.setFillColor(ri % 2 === 0 ? 250 : 244, ri % 2 === 0 ? 250 : 243, ri % 2 === 0 ? 248 : 240);
+        doc.rect(margin, y, contentW, 9, 'F');
+        doc.setTextColor(74, 72, 69);
+        doc.setFontSize(8);
+        doc.setFont('helvetica', 'normal');
+        var lines = doc.splitTextToSize(item, contentW - 30);
+        doc.text(lines[0], margin + 4, y + 6);
+        // Rating circles
+        for (var v = 1; v <= 5; v++) {
+          var cx = pageW - margin - (5 - v) * 9 - 4;
+          if (parseInt(rating) === v) {
+            doc.setFillColor(201, 151, 58);
+            doc.circle(cx, y + 4.5, 3.5, 'F');
+            doc.setTextColor(255, 255, 255);
+          } else {
+            doc.setFillColor(232, 230, 225);
+            doc.circle(cx, y + 4.5, 3.5, 'F');
+            doc.setTextColor(160, 156, 150);
+          }
+          doc.setFontSize(7);
+          doc.setFont('helvetica', 'bold');
+          doc.text(String(v), cx - 1.5, y + 6.2);
+        }
+        y += 9;
+      });
+      y += 6;
+    });
+
+    // Open feedback
+    checkPage(20);
+    doc.setFillColor(13, 27, 42);
+    doc.rect(margin, y, contentW, 10, 'F');
+    doc.setFillColor(201, 151, 58);
+    doc.rect(margin, y + 10, contentW, 1, 'F');
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(9);
+    doc.setFont('helvetica', 'bold');
+    doc.text('SECTION 5: OPEN FEEDBACK', margin + 6, y + 7);
+    y += 16;
+
+    var openQs = [
+      { q: 'Most helpful about trainer\'s delivery style:', a: formSnapshot.q_helpful },
+      { q: 'What the trainer could improve:', a: formSnapshot.q_improve },
+      { q: 'Suggestions for improving the training:', a: formSnapshot.q_suggest }
+    ];
+    openQs.forEach(function(oq) {
+      checkPage(16);
+      doc.setTextColor(106, 103, 96);
+      doc.setFontSize(8);
+      doc.setFont('helvetica', 'bold');
+      doc.text(oq.q, margin, y);
+      y += 5;
+      doc.setTextColor(26, 26, 26);
+      doc.setFont('helvetica', 'normal');
+      var lines = doc.splitTextToSize(oq.a || '-', contentW);
+      doc.text(lines, margin, y);
+      y += lines.length * 5 + 8;
+    });
+
+    // Footer
+    doc.setFillColor(13, 27, 42);
+    doc.rect(0, 285, 210, 12, 'F');
+    doc.setTextColor(201, 151, 58);
+    doc.setFontSize(7);
+    doc.setFont('helvetica', 'normal');
+    doc.text('Wegagen Bank  ·  IIT Training Feedback  ·  June 2026  ·  Code: ' + (formSnapshot.code || ''), margin, 292);
+
+    doc.save('Wegagen-IIT-Feedback-' + (formSnapshot.code || 'receipt') + '.pdf');
+  } catch(err) {
+    alert('PDF generation failed: ' + err.message);
+  }
+
+  btn.textContent = 'Download PDF Receipt';
+  btn.disabled = false;
 }
 
 function resetForm() {
   document.getElementById('feedback-form').reset();
   document.getElementById('f-date').valueAsDate = new Date();
-  document.getElementById('confirm-msg').style.display = 'none';
-  document.querySelector('.submit-area').style.display = 'flex';
+  document.getElementById('confirm-screen').style.display = 'none';
+  document.querySelectorAll('.section-card, .meta-card').forEach(function(c) { c.style.display = ''; });
+  document.querySelector('.submit-wrap').style.display = 'flex';
   document.getElementById('submit-btn').disabled = false;
-  document.getElementById('submit-btn').textContent = 'Submit Feedback';
+  document.getElementById('submit-btn').textContent = 'Submit Feedback →';
   document.getElementById('topic-error').style.display = 'none';
+  document.getElementById('general-error').style.display = 'none';
+  updateProgress();
 }
 </script>
 </body>
