@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IIT Training — Wegagen Bank Feedback Form | June 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #1a1a1a;
+    --ink-soft: #555;
+    --ink-muted: #999;
+    --paper: #faf9f6;
+    --paper-card: #ffffff;
+    --rule: #e8e4dc;
+    --gold: #b8922a;
+    --gold-light: #f5edd8;
+    --gold-dark: #8a6c1e;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 3rem 1rem 5rem;
+  }
+
+  .page { max-width: 720px; margin: 0 auto; }
+
+  .masthead {
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+    padding-bottom: 2rem;
+  }
+  .masthead::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 2px;
+    background: var(--gold);
+    margin: 1.5rem auto 0;
+  }
+  .masthead-eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+  }
+  .masthead h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(26px, 5vw, 38px);
+    font-weight: 400;
+    line-height: 1.2;
+    color: var(--ink);
+  }
+  .masthead-sub {
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin-top: 0.6rem;
+  }
+
+  .meta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 2rem;
+  }
+  .meta-grid .full { grid-column: 1 / -1; }
+  .field-group { display: flex; flex-direction: column; gap: 5px; }
+  .field-group label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+    font-weight: 500;
+  }
+  .field-group input,
+  .field-group select {
+    border: none;
+    border-bottom: 1.5px solid var(--rule);
+    background: transparent;
+    padding: 8px 2px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+  }
+  .field-group select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 4px center;
+    padding-right: 24px;
+  }
+  .field-group input:focus,
+  .field-group select:focus { border-color: var(--gold); }
+
+  .topic-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 6px;
+  }
+  .topic-pill input[type="radio"] { display: none; }
+  .topic-pill label {
+    display: inline-block;
+    padding: 6px 14px;
+    border: 1px solid var(--rule);
+    border-radius: 20px;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    cursor: pointer;
+    transition: all 0.15s;
+    line-height: 1.4;
+  }
+  .topic-pill input[type="radio"]:checked + label {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: #fff;
+  }
+  .topic-pill label:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  .section-card {
+    background: var(--paper-card);
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    margin-bottom: 1.25rem;
+    overflow: hidden;
+    animation: fadeUp 0.4s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .section-card:nth-child(1) { animation-delay: 0.05s; }
+  .section-card:nth-child(2) { animation-delay: 0.1s; }
+  .section-card:nth-child(3) { animation-delay: 0.15s; }
+  .section-card:nth-child(4) { animation-delay: 0.2s; }
+  .section-card:nth-child(5) { animation-delay: 0.25s; }
+
+  .section-head {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--rule);
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    background: var(--paper);
+  }
+  .section-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 28px;
+    color: var(--gold);
+    line-height: 1;
+    min-width: 28px;
+  }
+  .section-title {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: var(--ink);
+  }
+
+  .rating-wrap { padding: 0; }
+  .rating-table { width: 100%; border-collapse: collapse; }
+  .rating-table thead th {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--ink-muted);
+    letter-spacing: 0.08em;
+    padding: 10px 8px;
+    text-align: center;
+    border-bottom: 1px solid var(--rule);
+  }
+  .rating-table thead th:first-child { text-align: left; padding-left: 1.5rem; }
+  .rating-table thead th:last-child { padding-right: 1.5rem; }
+  .rating-table tbody tr { transition: background 0.15s; }
+  .rating-table tbody tr:hover { background: var(--gold-light); }
+  .rating-table tbody td {
+    padding: 12px 8px;
+    border-bottom: 1px solid var(--rule);
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    text-align: center;
+    vertical-align: middle;
+  }
+  .rating-table tbody tr:last-child td { border-bottom: none; }
+  .rating-table tbody td:first-child {
+    text-align: left;
+    padding-left: 1.5rem;
+    color: var(--ink);
+    font-size: 13px;
+    line-height: 1.45;
+  }
+  .rating-table tbody td:last-child { padding-right: 1.5rem; }
+
+  .radio-cell { position: relative; }
+  .radio-cell input[type="radio"] { display: none; }
+  .radio-cell label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border: 1.5px solid var(--rule);
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--ink-muted);
+    transition: all 0.15s;
+  }
+  .radio-cell input[type="radio"]:checked + label {
+    background: var(--gold);
+    border-color: var(--gold);
+    color: #fff;
+  }
+  .radio-cell label:hover { border-color: var(--gold); color: var(--gold); }
+
+  .scale-legend {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 1.5rem 10px;
+    font-size: 10px;
+    color: var(--ink-muted);
+    letter-spacing: 0.06em;
+    border-top: 1px dashed var(--rule);
+  }
+
+  .open-section { padding: 1.25rem 1.5rem; }
+  .open-q { margin-bottom: 1.25rem; }
+  .open-q:last-child { margin-bottom: 0; }
+  .open-q p { font-size: 13px; color: var(--ink); margin-bottom: 8px; line-height: 1.5; }
+  .open-q textarea {
+    width: 100%;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    padding: 10px 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--ink);
+    background: var(--paper);
+    resize: vertical;
+    min-height: 80px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .open-q textarea:focus { border-color: var(--gold); }
+
+  .submit-area {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+  }
+  .btn-submit {
+    background: var(--gold);
+    color: #fff;
+    border: none;
+    padding: 14px 48px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background 0.2s, transform 0.1s;
+  }
+  .btn-submit:hover { background: var(--gold-dark); }
+  .btn-submit:active { transform: scale(0.98); }
+  .btn-reset {
+    background: none;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    color: var(--ink-muted);
+    cursor: pointer;
+    letter-spacing: 0.06em;
+    text-decoration: underline;
+    padding: 4px;
+  }
+
+  #confirm-msg {
+    display: none;
+    text-align: center;
+    padding: 2rem;
+    background: var(--gold-light);
+    border: 1px solid var(--gold);
+    border-radius: 2px;
+    margin-top: 1rem;
+  }
+  #confirm-msg h2 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--gold-dark);
+    margin-bottom: 0.5rem;
+  }
+  #confirm-msg p { font-size: 14px; color: var(--ink-soft); }
+
+  @media (max-width: 520px) {
+    .meta-grid { grid-template-columns: 1fr; }
+    .rating-table thead th, .rating-table tbody td { padding: 10px 4px; }
+    .rating-table tbody td:first-child { padding-left: 1rem; font-size: 12px; }
+    .radio-cell label { width: 24px; height: 24px; font-size: 11px; }
+  }
+
+  @media print {
+    body { background: #fff; padding: 1rem; }
+    .btn-submit, .btn-reset { display: none; }
+    .section-card { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="masthead">
+    <p class="masthead-eyebrow">Wegagen Bank &nbsp;·&nbsp; IIT Training &nbsp;·&nbsp; June 2026</p>
+    <h1>Participant Feedback Form</h1>
+    <p class="masthead-sub">Please rate each item honestly — your feedback helps improve future sessions.</p>
+  </div>
+
+  <form id="feedback-form" onsubmit="handleSubmit(event)">
+
+    <!-- Meta -->
+    <div class="meta-grid">
+      <div class="field-group">
+        <label>Date</label>
+        <input type="date" name="date" id="f-date">
+      </div>
+      <div class="field-group">
+        <label>Trainer(s)</label>
+        <input type="text" name="trainer" placeholder="Trainer name(s)">
+      </div>
+      <div class="field-group full">
+        <label>Participant Name (Optional)</label>
+        <input type="text" name="participant" placeholder="Your name">
+      </div>
+      <div class="field-group full">
+        <label>Training Topic</label>
+        <div class="topic-pills" id="topic-pills">
+          <div class="topic-pill"><input type="radio" name="topic" id="t1" value="Treasury Product Development" required><label for="t1">1. Treasury Product Development</label></div>
+          <div class="topic-pill"><input type="radio" name="topic" id="t2" value="FX Trading"><label for="t2">2. FX Trading</label></div>
+          <div class="topic-pill"><input type="radio" name="topic" id="t3" value="Derivatives and Hedge Strategies"><label for="t3">3. Derivatives &amp; Hedge Strategies</label></div>
+          <div class="topic-pill"><input type="radio" name="topic" id="t4" value="Operational Risk Management"><label for="t4">4. Operational Risk Management</label></div>
+          <div class="topic-pill"><input type="radio" name="topic" id="t5" value="Advanced NPL"><label for="t5">5. Advanced NPL</label></div>
+          <div class="topic-pill"><input type="radio" name="topic" id="t6" value="Sales and Revenue Growth"><label for="t6">6. Sales &amp; Revenue Growth</label></div>
+          <div class="topic-pill"><input type="radio" name="topic" id="t7" value="Talent Management"><label for="t7">7. Talent Management</label></div>
+          <div class="topic-pill"><input type="radio" name="topic" id="t8" value="Digital Transformation in Banking"><label for="t8">8. Digital Transformation in Banking</label></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 1 -->
+    <div class="section-card">
+      <div class="section-head">
+        <span class="section-num">1</span>
+        <span class="section-title">Training Content</span>
+      </div>
+      <div class="rating-wrap" id="s1-wrap"></div>
+      <div class="scale-legend"><span>1 — Poor</span><span>5 — Excellent</span></div>
+    </div>
+
+    <!-- Section 2 -->
+    <div class="section-card">
+      <div class="section-head">
+        <span class="section-num">2</span>
+        <span class="section-title">Trainer Evaluation</span>
+      </div>
+      <div class="rating-wrap" id="s2-wrap"></div>
+      <div class="scale-legend"><span>1 — Poor</span><span>5 — Excellent</span></div>
+    </div>
+
+    <!-- Section 3 -->
+    <div class="section-card">
+      <div class="section-head">
+        <span class="section-num">3</span>
+        <span class="section-title">Training Experience</span>
+      </div>
+      <div class="rating-wrap" id="s3-wrap"></div>
+      <div class="scale-legend"><span>1 — Poor</span><span>5 — Excellent</span></div>
+    </div>
+
+    <!-- Section 4 -->
+    <div class="section-card">
+      <div class="section-head">
+        <span class="section-num">4</span>
+        <span class="section-title">Overall Impression</span>
+      </div>
+      <div class="rating-wrap" id="s4-wrap"></div>
+      <div class="scale-legend"><span>1 — Strongly Disagree</span><span>5 — Strongly Agree</span></div>
+    </div>
+
+    <!-- Section 5 -->
+    <div class="section-card">
+      <div class="section-head">
+        <span class="section-num">5</span>
+        <span class="section-title">Open Feedback</span>
+      </div>
+      <div class="open-section">
+        <div class="open-q">
+          <p>What did you find most helpful about the trainer's delivery style?</p>
+          <textarea name="q_helpful" placeholder="Share your thoughts…"></textarea>
+        </div>
+        <div class="open-q">
+          <p>What could the trainer improve or do differently in future sessions?</p>
+          <textarea name="q_improve" placeholder="Any suggestions…"></textarea>
+        </div>
+        <div class="open-q">
+          <p>Any suggestions for improving the training overall?</p>
+          <textarea name="q_suggest" placeholder="General feedback…"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="submit-area">
+      <button type="submit" class="btn-submit">Submit Feedback</button>
+      <button type="button" class="btn-reset" onclick="resetForm()">Clear all fields</button>
+    </div>
+
+    <div id="confirm-msg">
+      <h2>Thank you for your feedback</h2>
+      <p>Your responses have been recorded. You may now close this window or print this page.</p>
+    </div>
+
+  </form>
+
+</div>
+
+<script>
+const sections = {
+  s1: [
+    "The objectives of the training were clear.",
+    "The content was relevant and practical.",
+    "The training addressed real-world challenges.",
+    "The supporting materials (slides, handouts) were helpful."
+  ],
+  s2: [
+    "Demonstrated deep knowledge of the subject.",
+    "Explained complex concepts in an understandable way.",
+    "Was engaging and encouraged participation.",
+    "Managed time effectively during the sessions.",
+    "Was approachable and responsive to questions.",
+    "Created a comfortable and respectful learning environment."
+  ],
+  s3: [
+    "The venue and setup supported effective learning.",
+    "Group activities and discussions were valuable.",
+    "The pace and duration of the training were appropriate."
+  ],
+  s4: [
+    "I feel more confident in executing strategy after this training.",
+    "I would recommend this trainer and session to others."
+  ]
+};
+
+Object.entries(sections).forEach(([id, items]) => {
+  const wrap = document.getElementById(id + '-wrap');
+  const table = document.createElement('table');
+  table.className = 'rating-table';
+  table.innerHTML = '<thead><tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead><tbody></tbody>';
+  const tbody = table.querySelector('tbody');
+  items.forEach((label, ri) => {
+    const tr = document.createElement('tr');
+    let html = '<td>' + label + '</td>';
+    for (let v = 1; v <= 5; v++) {
+      const uid = id + '_r' + ri + '_v' + v;
+      html += '<td class="radio-cell"><input type="radio" name="' + id + '_r' + ri + '" id="' + uid + '" value="' + v + '" required><label for="' + uid + '">' + v + '</label></td>';
+    }
+    tr.innerHTML = html;
+    tbody.appendChild(tr);
+  });
+  wrap.appendChild(table);
+});
+
+document.getElementById('f-date').valueAsDate = new Date();
+
+function handleSubmit(e) {
+  e.preventDefault();
+  document.getElementById('confirm-msg').style.display = 'block';
+  document.querySelector('.submit-area').style.display = 'none';
+  document.getElementById('confirm-msg').scrollIntoView({ behavior: 'smooth' });
+}
+
+function resetForm() {
+  document.getElementById('feedback-form').reset();
+  document.getElementById('f-date').valueAsDate = new Date();
+  document.getElementById('confirm-msg').style.display = 'none';
+  document.querySelector('.submit-area').style.display = 'flex';
+}
+</script>
+</body>
+</html>
