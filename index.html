@@ -80,8 +80,7 @@
     color: var(--ink-muted);
     font-weight: 500;
   }
-  .field-group input,
-  .field-group select {
+  .field-group input {
     border: none;
     border-bottom: 1.5px solid var(--rule);
     background: transparent;
@@ -92,18 +91,8 @@
     outline: none;
     transition: border-color 0.2s;
     width: 100%;
-    appearance: none;
-    -webkit-appearance: none;
-    cursor: pointer;
   }
-  .field-group select {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 4px center;
-    padding-right: 24px;
-  }
-  .field-group input:focus,
-  .field-group select:focus { border-color: var(--gold); }
+  .field-group input:focus { border-color: var(--gold); }
 
   .topic-pills {
     display: flex;
@@ -128,10 +117,7 @@
     border-color: var(--gold);
     color: #fff;
   }
-  .topic-pill label:hover {
-    border-color: var(--gold);
-    color: var(--gold);
-  }
+  .topic-pill label:hover { border-color: var(--gold); color: var(--gold); }
 
   .section-card {
     background: var(--paper-card);
@@ -282,6 +268,7 @@
   }
   .btn-submit:hover { background: var(--gold-dark); }
   .btn-submit:active { transform: scale(0.98); }
+  .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; }
   .btn-reset {
     background: none;
     border: none;
@@ -297,7 +284,7 @@
   #confirm-msg {
     display: none;
     text-align: center;
-    padding: 2rem;
+    padding: 2.5rem 2rem;
     background: var(--gold-light);
     border: 1px solid var(--gold);
     border-radius: 2px;
@@ -305,12 +292,36 @@
   }
   #confirm-msg h2 {
     font-family: 'DM Serif Display', serif;
-    font-size: 22px;
+    font-size: 26px;
     font-weight: 400;
     color: var(--gold-dark);
     margin-bottom: 0.5rem;
   }
-  #confirm-msg p { font-size: 14px; color: var(--ink-soft); }
+  #confirm-msg .conf-code {
+    font-size: 36px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    color: var(--gold-dark);
+    margin: 1rem 0;
+    font-family: 'DM Serif Display', serif;
+  }
+  #confirm-msg p { font-size: 14px; color: var(--ink-soft); line-height: 1.6; }
+  #confirm-msg .gift-note {
+    margin-top: 1rem;
+    padding: 0.75rem 1rem;
+    background: var(--gold);
+    color: #fff;
+    border-radius: 2px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .error-msg {
+    color: #c0392b;
+    font-size: 12px;
+    margin-top: 4px;
+    display: none;
+  }
 
   @media (max-width: 520px) {
     .meta-grid { grid-template-columns: 1fr; }
@@ -332,37 +343,42 @@
   <div class="masthead">
     <p class="masthead-eyebrow">Wegagen Bank &nbsp;·&nbsp; IIT Training &nbsp;·&nbsp; June 2026</p>
     <h1>Participant Feedback Form</h1>
-    <p class="masthead-sub">Please rate each item honestly — your feedback helps improve future sessions.</p>
+    <p class="masthead-sub">Please complete all fields — your feedback helps improve future sessions.</p>
   </div>
 
   <form id="feedback-form" onsubmit="handleSubmit(event)">
 
+    <input type="hidden" name="access_key" value="ce8d6658-2d34-4f30-8667-6e1fccc1f7f1">
+    <input type="hidden" name="subject" value="Wegagen IIT Training — New Feedback Submission">
+    <input type="hidden" name="from_name" value="Wegagen IIT Feedback Form">
+
     <!-- Meta -->
     <div class="meta-grid">
       <div class="field-group">
-        <label>Date</label>
-        <input type="date" name="date" id="f-date">
+        <label>Date *</label>
+        <input type="date" name="date" id="f-date" required>
       </div>
       <div class="field-group">
-        <label>Trainer(s)</label>
-        <input type="text" name="trainer" placeholder="Trainer name(s)">
+        <label>Trainer(s) *</label>
+        <input type="text" name="trainer" placeholder="Trainer name(s)" required>
       </div>
       <div class="field-group full">
         <label>Participant Name (Optional)</label>
         <input type="text" name="participant" placeholder="Your name">
       </div>
       <div class="field-group full">
-        <label>Training Topic</label>
+        <label>Training Topic *</label>
         <div class="topic-pills" id="topic-pills">
-          <div class="topic-pill"><input type="radio" name="topic" id="t1" value="Treasury Product Development" required><label for="t1">1. Treasury Product Development</label></div>
-          <div class="topic-pill"><input type="radio" name="topic" id="t2" value="FX Trading"><label for="t2">2. FX Trading</label></div>
-          <div class="topic-pill"><input type="radio" name="topic" id="t3" value="Derivatives and Hedge Strategies"><label for="t3">3. Derivatives &amp; Hedge Strategies</label></div>
-          <div class="topic-pill"><input type="radio" name="topic" id="t4" value="Operational Risk Management"><label for="t4">4. Operational Risk Management</label></div>
-          <div class="topic-pill"><input type="radio" name="topic" id="t5" value="Advanced NPL"><label for="t5">5. Advanced NPL</label></div>
-          <div class="topic-pill"><input type="radio" name="topic" id="t6" value="Sales and Revenue Growth"><label for="t6">6. Sales &amp; Revenue Growth</label></div>
-          <div class="topic-pill"><input type="radio" name="topic" id="t7" value="Talent Management"><label for="t7">7. Talent Management</label></div>
-          <div class="topic-pill"><input type="radio" name="topic" id="t8" value="Digital Transformation in Banking"><label for="t8">8. Digital Transformation in Banking</label></div>
+          <div class="topic-pill"><input type="radio" name="topic" id="t1" value="1. Treasury Product Development" required><label for="t1">1. Treasury Product Development</label></div>
+          <div class="topic-pill"><input type="radio" name="topic" id="t2" value="2. FX Trading"><label for="t2">2. FX Trading</label></div>
+          <div class="topic-pill"><input type="radio" name="topic" id="t3" value="3. Derivatives and Hedge Strategies"><label for="t3">3. Derivatives &amp; Hedge Strategies</label></div>
+          <div class="topic-pill"><input type="radio" name="topic" id="t4" value="4. Operational Risk Management"><label for="t4">4. Operational Risk Management</label></div>
+          <div class="topic-pill"><input type="radio" name="topic" id="t5" value="5. Advanced NPL"><label for="t5">5. Advanced NPL</label></div>
+          <div class="topic-pill"><input type="radio" name="topic" id="t6" value="6. Sales and Revenue Growth"><label for="t6">6. Sales &amp; Revenue Growth</label></div>
+          <div class="topic-pill"><input type="radio" name="topic" id="t7" value="7. Talent Management"><label for="t7">7. Talent Management</label></div>
+          <div class="topic-pill"><input type="radio" name="topic" id="t8" value="8. Digital Transformation in Banking"><label for="t8">8. Digital Transformation in Banking</label></div>
         </div>
+        <span class="error-msg" id="topic-error">Please select a training topic.</span>
       </div>
     </div>
 
@@ -414,32 +430,34 @@
       </div>
       <div class="open-section">
         <div class="open-q">
-          <p>What did you find most helpful about the trainer's delivery style?</p>
-          <textarea name="q_helpful" placeholder="Share your thoughts…"></textarea>
+          <p>What did you find most helpful about the trainer's delivery style? *</p>
+          <textarea name="q_helpful" placeholder="Share your thoughts…" required></textarea>
         </div>
         <div class="open-q">
-          <p>What could the trainer improve or do differently in future sessions?</p>
-          <textarea name="q_improve" placeholder="Any suggestions…"></textarea>
+          <p>What could the trainer improve or do differently in future sessions? *</p>
+          <textarea name="q_improve" placeholder="Any suggestions…" required></textarea>
         </div>
         <div class="open-q">
-          <p>Any suggestions for improving the training overall?</p>
-          <textarea name="q_suggest" placeholder="General feedback…"></textarea>
+          <p>Any suggestions for improving the training overall? *</p>
+          <textarea name="q_suggest" placeholder="General feedback…" required></textarea>
         </div>
       </div>
     </div>
 
     <div class="submit-area">
-      <button type="submit" class="btn-submit">Submit Feedback</button>
+      <button type="submit" class="btn-submit" id="submit-btn">Submit Feedback</button>
       <button type="button" class="btn-reset" onclick="resetForm()">Clear all fields</button>
     </div>
 
     <div id="confirm-msg">
-      <h2>Thank you for your feedback</h2>
-      <p>Your responses have been recorded. You may now close this window or print this page.</p>
+      <h2>Thank you!</h2>
+      <p>Your feedback has been submitted successfully.</p>
+      <div class="conf-code" id="conf-code"></div>
+      <div class="gift-note">Show this code at the desk to collect your gift bag</div>
+      <p style="margin-top:1rem; font-size:13px;">Your response has been emailed to the training team.</p>
     </div>
 
   </form>
-
 </div>
 
 <script>
@@ -469,18 +487,21 @@ const sections = {
   ]
 };
 
-Object.entries(sections).forEach(([id, items]) => {
-  const wrap = document.getElementById(id + '-wrap');
-  const table = document.createElement('table');
+Object.entries(sections).forEach(function(entry) {
+  var id = entry[0];
+  var items = entry[1];
+  var wrap = document.getElementById(id + '-wrap');
+  var table = document.createElement('table');
   table.className = 'rating-table';
   table.innerHTML = '<thead><tr><th></th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead><tbody></tbody>';
-  const tbody = table.querySelector('tbody');
-  items.forEach((label, ri) => {
-    const tr = document.createElement('tr');
-    let html = '<td>' + label + '</td>';
-    for (let v = 1; v <= 5; v++) {
-      const uid = id + '_r' + ri + '_v' + v;
-      html += '<td class="radio-cell"><input type="radio" name="' + id + '_r' + ri + '" id="' + uid + '" value="' + v + '" required><label for="' + uid + '">' + v + '</label></td>';
+  var tbody = table.querySelector('tbody');
+  items.forEach(function(label, ri) {
+    var tr = document.createElement('tr');
+    var html = '<td>' + label + '</td>';
+    for (var v = 1; v <= 5; v++) {
+      var uid = id + '_r' + ri + '_v' + v;
+      var fname = id + '_r' + ri;
+      html += '<td class="radio-cell"><input type="radio" name="' + fname + '" id="' + uid + '" value="' + v + '" required><label for="' + uid + '">' + v + '</label></td>';
     }
     tr.innerHTML = html;
     tbody.appendChild(tr);
@@ -490,11 +511,56 @@ Object.entries(sections).forEach(([id, items]) => {
 
 document.getElementById('f-date').valueAsDate = new Date();
 
-function handleSubmit(e) {
+function generateCode() {
+  var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  var code = 'WB-';
+  for (var i = 0; i < 4; i++) {
+    code += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return code;
+}
+
+async function handleSubmit(e) {
   e.preventDefault();
-  document.getElementById('confirm-msg').style.display = 'block';
-  document.querySelector('.submit-area').style.display = 'none';
-  document.getElementById('confirm-msg').scrollIntoView({ behavior: 'smooth' });
+
+  var topicSelected = document.querySelector('input[name="topic"]:checked');
+  if (!topicSelected) {
+    document.getElementById('topic-error').style.display = 'block';
+    document.getElementById('topic-pills').scrollIntoView({ behavior: 'smooth' });
+    return;
+  }
+  document.getElementById('topic-error').style.display = 'none';
+
+  var btn = document.getElementById('submit-btn');
+  btn.disabled = true;
+  btn.textContent = 'Submitting...';
+
+  var form = document.getElementById('feedback-form');
+  var formData = new FormData(form);
+  var code = generateCode();
+  formData.append('confirmation_code', code);
+
+  try {
+    var response = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      body: formData
+    });
+    var result = await response.json();
+    if (result.success) {
+      document.getElementById('conf-code').textContent = code;
+      document.getElementById('confirm-msg').style.display = 'block';
+      document.querySelector('.submit-area').style.display = 'none';
+      document.getElementById('confirm-msg').scrollIntoView({ behavior: 'smooth' });
+    } else {
+      btn.disabled = false;
+      btn.textContent = 'Submit Feedback';
+      alert('Submission failed. Please try again.');
+    }
+  } catch (err) {
+    btn.disabled = false;
+    btn.textContent = 'Submit Feedback';
+    alert('Network error. Please check your connection and try again.');
+  }
 }
 
 function resetForm() {
@@ -502,6 +568,9 @@ function resetForm() {
   document.getElementById('f-date').valueAsDate = new Date();
   document.getElementById('confirm-msg').style.display = 'none';
   document.querySelector('.submit-area').style.display = 'flex';
+  document.getElementById('submit-btn').disabled = false;
+  document.getElementById('submit-btn').textContent = 'Submit Feedback';
+  document.getElementById('topic-error').style.display = 'none';
 }
 </script>
 </body>
