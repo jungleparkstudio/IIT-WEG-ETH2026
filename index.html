@@ -26,6 +26,7 @@
   --text-muted: #8a8680;
   --danger: #c0392b;
   --success: #1a6b3c;
+  --tg-blue: #229ED9;
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 20px;
@@ -35,7 +36,6 @@
 }
 
 html { scroll-behavior: smooth; }
-
 body {
   font-family: 'Outfit', sans-serif;
   background: var(--off-white);
@@ -44,7 +44,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* ── HERO HEADER ── */
+/* HERO */
 .hero {
   background: var(--navy);
   padding: 48px 24px 56px;
@@ -83,11 +83,7 @@ body {
   color: var(--gold);
   margin-bottom: 20px;
 }
-.hero-dot {
-  width: 5px; height: 5px;
-  background: var(--gold);
-  border-radius: 50%;
-}
+.hero-dot { width: 5px; height: 5px; background: var(--gold); border-radius: 50%; }
 .hero h1 {
   font-family: 'Playfair Display', serif;
   font-size: clamp(26px, 6vw, 42px);
@@ -112,14 +108,7 @@ body {
   clip-path: ellipse(55% 100% at 50% 100%);
 }
 
-/* ── PAGE WRAP ── */
-.page {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 0 16px 80px;
-}
-
-/* ── PROGRESS BAR ── */
+/* PROGRESS */
 .progress-wrap {
   position: sticky;
   top: 0;
@@ -153,7 +142,14 @@ body {
   text-align: right;
 }
 
-/* ── META CARD ── */
+/* PAGE */
+.page {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 16px 80px;
+}
+
+/* META CARD */
 .meta-card {
   background: var(--white);
   border-radius: var(--radius-md);
@@ -162,8 +158,9 @@ body {
   margin: 20px 0 16px;
   box-shadow: var(--shadow-sm);
 }
-.meta-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.meta-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
 .meta-row.full { grid-template-columns: 1fr; }
+.meta-row:last-child { margin-bottom: 0; }
 .field-wrap { display: flex; flex-direction: column; gap: 6px; }
 .field-label {
   font-size: 11px;
@@ -173,7 +170,7 @@ body {
   color: var(--text-muted);
 }
 .field-label span { color: var(--gold); }
-.field-input {
+.field-input, .field-select {
   border: 1.5px solid var(--gray-2);
   border-radius: var(--radius-sm);
   background: var(--gray-1);
@@ -185,23 +182,33 @@ body {
   transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
   width: 100%;
   -webkit-appearance: none;
+  appearance: none;
 }
-.field-input:focus {
+.field-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' stroke='%238a8680' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 38px;
+  cursor: pointer;
+}
+.field-input:focus, .field-select:focus {
   border-color: var(--gold);
   background: var(--white);
   box-shadow: 0 0 0 3px rgba(201,151,58,0.12);
 }
 .field-input::placeholder { color: var(--gray-3); }
+.field-select option { color: var(--text); }
+.field-select option:first-child { color: var(--gray-3); }
 
-/* ── TOPIC PILLS ── */
+/* TOPIC CHECKBOXES */
 .topic-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 8px;
   margin-top: 4px;
 }
-.topic-pill input[type="radio"] { display: none; }
-.topic-pill label {
+.topic-check input[type="checkbox"] { display: none; }
+.topic-check label {
   display: flex;
   align-items: flex-start;
   gap: 8px;
@@ -216,8 +223,9 @@ body {
   color: var(--text-soft);
   line-height: 1.4;
   min-height: 52px;
+  -webkit-tap-highlight-color: transparent;
 }
-.topic-pill label .pill-num {
+.topic-check label .pill-num {
   font-size: 10px;
   font-weight: 700;
   color: var(--gold-dark);
@@ -229,21 +237,35 @@ body {
   margin-top: 1px;
   flex-shrink: 0;
 }
-.topic-pill input[type="radio"]:checked + label {
+.topic-check input[type="checkbox"]:checked + label {
   background: var(--navy);
   border-color: var(--navy);
   color: var(--white);
 }
-.topic-pill input[type="radio"]:checked + label .pill-num {
+.topic-check input[type="checkbox"]:checked + label .pill-num {
   background: rgba(201,151,58,0.25);
   color: var(--gold);
 }
-.topic-pill label:hover {
-  border-color: var(--gold);
-  background: var(--gold-light);
-}
+.topic-check label:hover { border-color: var(--gold); background: var(--gold-light); }
 
-/* ── SECTION CARDS ── */
+.other-wrap { margin-top: 8px; display: none; }
+.other-wrap.visible { display: block; }
+.other-input {
+  border: 1.5px solid var(--gold);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  padding: 11px 14px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  color: var(--text);
+  outline: none;
+  width: 100%;
+  transition: box-shadow 0.2s;
+}
+.other-input:focus { box-shadow: 0 0 0 3px rgba(201,151,58,0.12); }
+.other-input::placeholder { color: var(--gray-3); }
+
+/* SECTION CARDS */
 .section-card {
   background: var(--white);
   border-radius: var(--radius-md);
@@ -257,12 +279,6 @@ body {
   from { opacity: 0; transform: translateY(16px); }
   to { opacity: 1; transform: translateY(0); }
 }
-.section-card:nth-child(1) { animation-delay: 0.05s; }
-.section-card:nth-child(2) { animation-delay: 0.12s; }
-.section-card:nth-child(3) { animation-delay: 0.19s; }
-.section-card:nth-child(4) { animation-delay: 0.26s; }
-.section-card:nth-child(5) { animation-delay: 0.33s; }
-
 .section-head {
   display: flex;
   align-items: center;
@@ -290,7 +306,7 @@ body {
   text-transform: uppercase;
 }
 
-/* ── RATING ROWS ── */
+/* RATING ROWS */
 .rating-item {
   display: flex;
   align-items: center;
@@ -309,18 +325,13 @@ body {
   flex: 1;
   min-width: 0;
 }
-.rating-stars {
-  display: flex;
-  gap: 5px;
-  flex-shrink: 0;
-}
+.rating-stars { display: flex; gap: 5px; flex-shrink: 0; }
 .star-cell input[type="radio"] { display: none; }
 .star-cell label {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
+  width: 32px; height: 32px;
   border-radius: 50%;
   border: 1.5px solid var(--gray-2);
   background: var(--gray-1);
@@ -338,11 +349,7 @@ body {
   transform: scale(1.08);
   box-shadow: 0 2px 8px rgba(201,151,58,0.4);
 }
-.star-cell label:hover {
-  border-color: var(--gold);
-  color: var(--gold);
-  background: var(--gold-light);
-}
+.star-cell label:hover { border-color: var(--gold); color: var(--gold); background: var(--gold-light); }
 .scale-bar {
   display: flex;
   justify-content: space-between;
@@ -354,7 +361,7 @@ body {
   border-top: 1px dashed var(--gray-2);
 }
 
-/* ── OPEN FEEDBACK ── */
+/* OPEN FEEDBACK */
 .open-body { padding: 16px 18px; display: flex; flex-direction: column; gap: 16px; }
 .open-q label {
   display: block;
@@ -387,7 +394,7 @@ body {
 }
 .open-q textarea::placeholder { color: var(--gray-3); }
 
-/* ── ERROR ── */
+/* ERROR */
 .error-banner {
   display: none;
   background: #fdf0ef;
@@ -400,7 +407,7 @@ body {
   font-weight: 500;
 }
 
-/* ── SUBMIT BUTTON ── */
+/* SUBMIT */
 .submit-wrap {
   padding: 8px 0 0;
   display: flex;
@@ -448,7 +455,7 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
-/* ── CONFIRMATION ── */
+/* CONFIRMATION */
 #confirm-screen {
   display: none;
   text-align: center;
@@ -484,12 +491,13 @@ body {
   font-size: 14px;
   color: var(--text-muted);
   margin-bottom: 24px;
+  line-height: 1.6;
 }
 .gift-box {
   background: var(--navy);
   border-radius: var(--radius-md);
   padding: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 .gift-box .gift-label {
   font-size: 11px;
@@ -511,7 +519,34 @@ body {
   font-weight: 500;
   color: rgba(255,255,255,0.7);
   margin-top: 8px;
+  line-height: 1.5;
 }
+
+/* TELEGRAM BUTTON */
+.tg-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  background: var(--tg-blue);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 15px 24px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s, transform 0.1s;
+  margin-bottom: 10px;
+  -webkit-tap-highlight-color: transparent;
+}
+.tg-btn:hover { background: #1a8bbf; }
+.tg-btn:active { transform: scale(0.98); }
+.tg-btn svg { width: 22px; height: 22px; flex-shrink: 0; }
+
 .pdf-btn {
   width: 100%;
   background: var(--gold);
@@ -524,12 +559,32 @@ body {
   font-weight: 600;
   cursor: pointer;
   letter-spacing: 0.03em;
-  transition: background 0.2s;
+  transition: background 0.2s, transform 0.1s;
   -webkit-tap-highlight-color: transparent;
 }
 .pdf-btn:hover { background: var(--gold-dark); }
+.pdf-btn:active { transform: scale(0.98); }
 
-/* ── MOBILE SPECIFIC ── */
+.confirm-divider {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin: 16px 0 12px;
+  position: relative;
+}
+.confirm-divider::before, .confirm-divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 30%;
+  height: 1px;
+  background: var(--gray-2);
+}
+.confirm-divider::before { left: 0; }
+.confirm-divider::after { right: 0; }
+
+/* MOBILE */
 @media (max-width: 480px) {
   .hero { padding: 36px 20px 48px; }
   .meta-row { grid-template-columns: 1fr; }
@@ -542,8 +597,7 @@ body {
 }
 
 @media print {
-  .progress-wrap, .btn-submit, .btn-reset, .pdf-btn { display: none; }
-  .hero { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  .progress-wrap, .btn-submit, .btn-reset, .pdf-btn, .tg-btn { display: none; }
 }
 </style>
 </head>
@@ -574,41 +628,57 @@ body {
 
     <!-- Meta -->
     <div class="meta-card">
-      <div class="meta-row" style="margin-bottom:16px;">
+
+      <div class="meta-row">
         <div class="field-wrap">
           <div class="field-label">Date <span>*</span></div>
           <input class="field-input" type="date" name="date" id="f-date" required>
         </div>
         <div class="field-wrap">
-          <div class="field-label">Trainer(s) <span>*</span></div>
-          <input class="field-input" type="text" name="trainer" placeholder="Trainer name(s)" required>
+          <div class="field-label">Trainer <span>*</span></div>
+          <select class="field-select" name="trainer" id="f-trainer" required>
+            <option value="" disabled selected>— Select trainer —</option>
+            <option value="Mr. Vijaya">1. Mr. Vijaya</option>
+            <option value="Mr. Mansoor">2. Mr. Mansoor</option>
+            <option value="Mr. Mohammad Z">3. Mr. Mohammad Z</option>
+            <option value="Mrs. Manisha C">4. Mrs. Manisha C</option>
+            <option value="Mr. Rajan B">5. Mr. Rajan B</option>
+            <option value="Mr. Wycliffe O">6. Mr. Wycliffe O</option>
+          </select>
         </div>
       </div>
-      <div class="meta-row full" style="margin-bottom:16px;">
+
+      <div class="meta-row full">
         <div class="field-wrap">
           <div class="field-label">Participant Name</div>
           <input class="field-input" type="text" name="participant" placeholder="Your name (optional)">
         </div>
       </div>
+
       <div class="meta-row full">
         <div class="field-wrap">
-          <div class="field-label">Training Topic <span>*</span></div>
+          <div class="field-label">Training Topic(s) <span>*</span> <span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--text-muted);font-size:10px;">— select all that apply</span></div>
           <div class="topic-grid" id="topic-grid">
-            <div class="topic-pill"><input type="radio" name="topic" id="t1" value="1. Treasury Product Development" required><label for="t1"><span class="pill-num">1</span>Treasury Product Development</label></div>
-            <div class="topic-pill"><input type="radio" name="topic" id="t2" value="2. FX Trading"><label for="t2"><span class="pill-num">2</span>FX Trading</label></div>
-            <div class="topic-pill"><input type="radio" name="topic" id="t3" value="3. Derivatives and Hedge Strategies"><label for="t3"><span class="pill-num">3</span>Derivatives &amp; Hedge Strategies</label></div>
-            <div class="topic-pill"><input type="radio" name="topic" id="t4" value="4. Operational Risk Management"><label for="t4"><span class="pill-num">4</span>Operational Risk Management</label></div>
-            <div class="topic-pill"><input type="radio" name="topic" id="t5" value="5. Advanced NPL"><label for="t5"><span class="pill-num">5</span>Advanced NPL</label></div>
-            <div class="topic-pill"><input type="radio" name="topic" id="t6" value="6. Sales and Revenue Growth"><label for="t6"><span class="pill-num">6</span>Sales &amp; Revenue Growth</label></div>
-            <div class="topic-pill"><input type="radio" name="topic" id="t7" value="7. Talent Management"><label for="t7"><span class="pill-num">7</span>Talent Management</label></div>
-            <div class="topic-pill"><input type="radio" name="topic" id="t8" value="8. Digital Transformation in Banking"><label for="t8"><span class="pill-num">8</span>Digital Transformation in Banking</label></div>
+            <div class="topic-check"><input type="checkbox" name="topic_1" id="t1" value="1. Treasury Product Development"><label for="t1"><span class="pill-num">1</span>Treasury Product Development</label></div>
+            <div class="topic-check"><input type="checkbox" name="topic_2" id="t2" value="2. FX Trading"><label for="t2"><span class="pill-num">2</span>FX Trading</label></div>
+            <div class="topic-check"><input type="checkbox" name="topic_3" id="t3" value="3. Derivatives and Hedge Strategies"><label for="t3"><span class="pill-num">3</span>Derivatives &amp; Hedge Strategies</label></div>
+            <div class="topic-check"><input type="checkbox" name="topic_4" id="t4" value="4. Operational Risk Management"><label for="t4"><span class="pill-num">4</span>Operational Risk Management</label></div>
+            <div class="topic-check"><input type="checkbox" name="topic_5" id="t5" value="5. Advanced NPL"><label for="t5"><span class="pill-num">5</span>Advanced NPL</label></div>
+            <div class="topic-check"><input type="checkbox" name="topic_6" id="t6" value="6. Sales and Revenue Growth"><label for="t6"><span class="pill-num">6</span>Sales &amp; Revenue Growth</label></div>
+            <div class="topic-check"><input type="checkbox" name="topic_7" id="t7" value="7. Talent Management"><label for="t7"><span class="pill-num">7</span>Talent Management</label></div>
+            <div class="topic-check"><input type="checkbox" name="topic_8" id="t8" value="8. Digital Transformation in Banking"><label for="t8"><span class="pill-num">8</span>Digital Transformation in Banking</label></div>
+            <div class="topic-check"><input type="checkbox" name="topic_other_check" id="t-other" value="Other"><label for="t-other"><span class="pill-num">+</span>Other</label></div>
           </div>
-          <div class="error-banner" id="topic-error">Please select a training topic to continue.</div>
+          <div class="other-wrap" id="other-wrap">
+            <input class="other-input" type="text" name="topic_other_text" id="other-text" placeholder="Please specify your topic…">
+          </div>
+          <div class="error-banner" id="topic-error">Please select at least one training topic.</div>
         </div>
       </div>
+
     </div>
 
-    <!-- Sections built by JS -->
+    <!-- Rating sections injected by JS -->
     <div id="sections-wrap"></div>
 
     <!-- Open Feedback -->
@@ -633,12 +703,13 @@ body {
       </div>
     </div>
 
-    <div class="submit-wrap">
+    <div class="submit-wrap" id="submit-wrap">
       <div class="error-banner" id="general-error">Please complete all required fields before submitting.</div>
       <button type="submit" class="btn-submit" id="submit-btn">Submit Feedback &rarr;</button>
       <button type="button" class="btn-reset" onclick="resetForm()">Clear all fields</button>
     </div>
 
+    <!-- Confirmation -->
     <div id="confirm-screen">
       <div class="confirm-icon">
         <svg viewBox="0 0 24 24" fill="none" stroke="#c9973a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -647,12 +718,23 @@ body {
       </div>
       <h2>Thank You!</h2>
       <p class="conf-sub">Your feedback has been submitted and emailed to the training team.</p>
+
       <div class="gift-box">
-        <div class="gift-label">Your Gift Bag Code</div>
+        <div class="gift-label">🎁 Your Gift Bag Code</div>
         <div class="gift-code" id="conf-code">----</div>
-        <div class="gift-note">Show this screen at the registration desk to collect your gift bag</div>
+        <div class="gift-note">Show this screen at the registration desk<br>to collect your gift bag</div>
       </div>
-      <button type="button" class="pdf-btn" onclick="downloadPDF()" id="pdf-btn">Download PDF Receipt</button>
+
+      <div class="confirm-divider">Stay Connected</div>
+
+      <a class="tg-btn" href="https://t.me/IIT2026alumni" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.17 13.667l-2.96-.924c-.643-.204-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.978.892z"/>
+        </svg>
+        Join our IIT Alumni Telegram Group
+      </a>
+
+      <button type="button" class="pdf-btn" onclick="downloadPDF()" id="pdf-btn">⬇ Download PDF Receipt</button>
     </div>
 
   </form>
@@ -662,94 +744,70 @@ body {
 var formSnapshot = {};
 
 var ratingSections = [
-  {
-    id: 's1', num: '1', title: 'Training Content',
-    scaleMin: '1 — Poor', scaleMax: '5 — Excellent',
-    items: [
-      'The objectives of the training were clear.',
-      'The content was relevant and practical.',
-      'The training addressed real-world challenges.',
-      'The supporting materials (slides, handouts) were helpful.'
-    ]
-  },
-  {
-    id: 's2', num: '2', title: 'Trainer Evaluation',
-    scaleMin: '1 — Poor', scaleMax: '5 — Excellent',
-    items: [
-      'Demonstrated deep knowledge of the subject.',
-      'Explained complex concepts in an understandable way.',
-      'Was engaging and encouraged participation.',
-      'Managed time effectively during the sessions.',
-      'Was approachable and responsive to questions.',
-      'Created a comfortable and respectful learning environment.'
-    ]
-  },
-  {
-    id: 's3', num: '3', title: 'Training Experience',
-    scaleMin: '1 — Poor', scaleMax: '5 — Excellent',
-    items: [
-      'The venue and setup supported effective learning.',
-      'Group activities and discussions were valuable.',
-      'The pace and duration of the training were appropriate.'
-    ]
-  },
-  {
-    id: 's4', num: '4', title: 'Overall Impression',
-    scaleMin: '1 — Strongly Disagree', scaleMax: '5 — Strongly Agree',
-    items: [
-      'I feel more confident in executing strategy after this training.',
-      'I would recommend this trainer and session to others.'
-    ]
-  }
+  { id:'s1', num:'1', title:'Training Content', scaleMin:'1 — Poor', scaleMax:'5 — Excellent',
+    items:['The objectives of the training were clear.','The content was relevant and practical.','The training addressed real-world challenges.','The supporting materials (slides, handouts) were helpful.'] },
+  { id:'s2', num:'2', title:'Trainer Evaluation', scaleMin:'1 — Poor', scaleMax:'5 — Excellent',
+    items:['Demonstrated deep knowledge of the subject.','Explained complex concepts in an understandable way.','Was engaging and encouraged participation.','Managed time effectively during the sessions.','Was approachable and responsive to questions.','Created a comfortable and respectful learning environment.'] },
+  { id:'s3', num:'3', title:'Training Experience', scaleMin:'1 — Poor', scaleMax:'5 — Excellent',
+    items:['The venue and setup supported effective learning.','Group activities and discussions were valuable.','The pace and duration of the training were appropriate.'] },
+  { id:'s4', num:'4', title:'Overall Impression', scaleMin:'1 — Strongly Disagree', scaleMax:'5 — Strongly Agree',
+    items:['I feel more confident in executing strategy after this training.','I would recommend this trainer and session to others.'] }
 ];
 
+// Build rating sections
 var wrap = document.getElementById('sections-wrap');
 ratingSections.forEach(function(sec) {
   var card = document.createElement('div');
   card.className = 'section-card';
-  var head = '<div class="section-head"><div class="section-badge">' + sec.num + '</div><div class="section-title">' + sec.title + '</div></div>';
-  var body = '';
+  var html = '<div class="section-head"><div class="section-badge">' + sec.num + '</div><div class="section-title">' + sec.title + '</div></div>';
   sec.items.forEach(function(item, ri) {
     var stars = '';
     for (var v = 1; v <= 5; v++) {
       var uid = sec.id + '_r' + ri + '_v' + v;
       stars += '<div class="star-cell"><input type="radio" name="' + sec.id + '_r' + ri + '" id="' + uid + '" value="' + v + '" required><label for="' + uid + '">' + v + '</label></div>';
     }
-    body += '<div class="rating-item"><div class="rating-text">' + item + '</div><div class="rating-stars">' + stars + '</div></div>';
+    html += '<div class="rating-item"><div class="rating-text">' + item + '</div><div class="rating-stars">' + stars + '</div></div>';
   });
-  var scale = '<div class="scale-bar"><span>' + sec.scaleMin + '</span><span>' + sec.scaleMax + '</span></div>';
-  card.innerHTML = head + body + scale;
+  html += '<div class="scale-bar"><span>' + sec.scaleMin + '</span><span>' + sec.scaleMax + '</span></div>';
+  card.innerHTML = html;
   wrap.appendChild(card);
 });
 
 document.getElementById('f-date').valueAsDate = new Date();
 
-// Progress tracking
-var allRequired = [];
+// Other topic toggle
+document.getElementById('t-other').addEventListener('change', function() {
+  var ow = document.getElementById('other-wrap');
+  if (this.checked) { ow.classList.add('visible'); document.getElementById('other-text').focus(); }
+  else { ow.classList.remove('visible'); document.getElementById('other-text').value = ''; }
+});
+
+// Progress
 function updateProgress() {
   var form = document.getElementById('feedback-form');
-  var radios = {};
   var total = 0; var filled = 0;
-  // date, trainer
   var date = form.querySelector('[name="date"]');
   var trainer = form.querySelector('[name="trainer"]');
   total += 2;
   if (date && date.value) filled++;
-  if (trainer && trainer.value.trim()) filled++;
-  // topic
+  if (trainer && trainer.value) filled++;
+  // topics
   total++;
-  if (form.querySelector('input[name="topic"]:checked')) filled++;
-  // rating radios
+  if (form.querySelectorAll('input[type="checkbox"]:checked').length > 0) filled++;
+  // rating groups
   var rGroups = {};
-  form.querySelectorAll('.star-cell input[type="radio"]').forEach(function(r) { rGroups[r.name] = rGroups[r.name] || []; rGroups[r.name].push(r); });
+  form.querySelectorAll('.star-cell input[type="radio"]').forEach(function(r) {
+    rGroups[r.name] = rGroups[r.name] || false;
+    if (r.checked) rGroups[r.name] = true;
+  });
   Object.keys(rGroups).forEach(function(g) {
     total++;
-    if (rGroups[g].some(function(r) { return r.checked; })) filled++;
+    if (rGroups[g]) filled++;
   });
   // textareas
   form.querySelectorAll('textarea[required]').forEach(function(t) {
     total++;
-    if (t.value.trim().length > 10) filled++;
+    if (t.value.trim().length > 5) filled++;
   });
   var pct = Math.round((filled / total) * 100);
   document.getElementById('progress-fill').style.width = pct + '%';
@@ -766,19 +824,33 @@ function generateCode() {
   return code;
 }
 
+function getTopics() {
+  var topics = [];
+  document.querySelectorAll('input[type="checkbox"]:checked').forEach(function(cb) {
+    if (cb.name === 'topic_other_check') {
+      var ot = document.getElementById('other-text').value.trim();
+      if (ot) topics.push('Other: ' + ot);
+      else topics.push('Other');
+    } else {
+      topics.push(cb.value);
+    }
+  });
+  return topics.join(', ');
+}
+
 function collectSnapshot() {
   var form = document.getElementById('feedback-form');
   var snap = {};
   snap.date = form.querySelector('[name="date"]').value;
   snap.trainer = form.querySelector('[name="trainer"]').value;
   snap.participant = form.querySelector('[name="participant"]').value || 'Anonymous';
-  var topicEl = form.querySelector('input[name="topic"]:checked');
-  snap.topic = topicEl ? topicEl.value : '';
+  snap.topics = getTopics();
+  snap.sections = {};
   ratingSections.forEach(function(sec) {
-    snap[sec.id] = {};
+    snap.sections[sec.id] = { title: sec.title, items: [] };
     sec.items.forEach(function(item, ri) {
       var checked = form.querySelector('input[name="' + sec.id + '_r' + ri + '"]:checked');
-      snap[sec.id][ri] = { label: item, val: checked ? checked.value : '-' };
+      snap.sections[sec.id].items.push({ label: item, val: checked ? checked.value : '-' });
     });
   });
   snap.q_helpful = form.querySelector('[name="q_helpful"]').value;
@@ -792,27 +864,33 @@ async function handleSubmit(e) {
   var form = document.getElementById('feedback-form');
 
   // validate topic
-  var topicOk = form.querySelector('input[name="topic"]:checked');
-  if (!topicOk) {
+  var topicsChecked = form.querySelectorAll('input[type="checkbox"]:checked').length;
+  if (topicsChecked === 0) {
     document.getElementById('topic-error').style.display = 'block';
     document.getElementById('topic-grid').scrollIntoView({ behavior: 'smooth', block: 'center' });
     return;
   }
   document.getElementById('topic-error').style.display = 'none';
 
-  // validate all required
+  // validate required fields
   var invalid = false;
-  form.querySelectorAll('[required]').forEach(function(el) {
-    if (el.type === 'radio') return;
-    if (!el.value.trim()) { invalid = true; el.focus(); }
-  });
-  // check radio groups
+  if (!form.querySelector('[name="date"]').value) invalid = true;
+  if (!form.querySelector('[name="trainer"]').value) invalid = true;
+
   var rGroups = {};
-  form.querySelectorAll('.star-cell input[type="radio"]').forEach(function(r) { rGroups[r.name] = rGroups[r.name] || false; if (r.checked) rGroups[r.name] = true; });
+  form.querySelectorAll('.star-cell input[type="radio"]').forEach(function(r) {
+    rGroups[r.name] = rGroups[r.name] || false;
+    if (r.checked) rGroups[r.name] = true;
+  });
   Object.values(rGroups).forEach(function(v) { if (!v) invalid = true; });
+
+  form.querySelectorAll('textarea[required]').forEach(function(t) {
+    if (!t.value.trim()) invalid = true;
+  });
 
   if (invalid) {
     document.getElementById('general-error').style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     return;
   }
   document.getElementById('general-error').style.display = 'none';
@@ -826,15 +904,15 @@ async function handleSubmit(e) {
   var fd = new FormData(form);
   var code = generateCode();
   fd.append('confirmation_code', code);
+  fd.append('topics_selected', formSnapshot.topics);
 
   try {
     var res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: fd });
     var result = await res.json();
     if (result.success) {
-      document.getElementById('conf-code').textContent = code;
       formSnapshot.code = code;
-      document.querySelector('.submit-wrap').style.display = 'none';
-      // hide all section cards
+      document.getElementById('conf-code').textContent = code;
+      document.getElementById('submit-wrap').style.display = 'none';
       document.querySelectorAll('.section-card, .meta-card').forEach(function(c) { c.style.display = 'none'; });
       document.getElementById('confirm-screen').style.display = 'block';
       document.getElementById('confirm-screen').scrollIntoView({ behavior: 'smooth' });
@@ -852,168 +930,98 @@ async function handleSubmit(e) {
 
 function downloadPDF() {
   var btn = document.getElementById('pdf-btn');
-  btn.textContent = 'Generating PDF…';
+  btn.textContent = 'Generating…';
   btn.disabled = true;
-
   try {
     var doc = new jspdf.jsPDF({ orientation: 'p', unit: 'mm', format: 'a4' });
-    var pageW = 210; var margin = 18; var contentW = pageW - margin * 2;
+    var margin = 18; var pageW = 210; var contentW = pageW - margin * 2;
     var y = 0;
 
-    function checkPage(needed) {
-      if (y + needed > 275) { doc.addPage(); y = 20; }
-    }
+    function checkPage(needed) { if (y + needed > 275) { doc.addPage(); y = 20; } }
 
-    // Header bar
-    doc.setFillColor(13, 27, 42);
-    doc.rect(0, 0, 210, 36, 'F');
-    doc.setFillColor(201, 151, 58);
-    doc.rect(0, 36, 210, 2, 'F');
-
-    doc.setTextColor(201, 151, 58);
-    doc.setFontSize(9);
-    doc.setFont('helvetica', 'bold');
+    doc.setFillColor(13,27,42); doc.rect(0,0,210,36,'F');
+    doc.setFillColor(201,151,58); doc.rect(0,36,210,2,'F');
+    doc.setTextColor(201,151,58); doc.setFontSize(9); doc.setFont('helvetica','bold');
     doc.text('WEGAGEN BANK  ·  IIT TRAINING  ·  JUNE 2026', margin, 14);
-    doc.setTextColor(255, 255, 255);
-    doc.setFontSize(18);
+    doc.setTextColor(255,255,255); doc.setFontSize(18);
     doc.text('Participant Feedback Form', margin, 28);
     y = 50;
 
-    // Confirmation code box
-    doc.setFillColor(247, 240, 227);
-    doc.roundedRect(margin, y, contentW, 22, 3, 3, 'F');
-    doc.setTextColor(158, 114, 32);
-    doc.setFontSize(9);
-    doc.setFont('helvetica', 'bold');
-    doc.text('GIFT BAG CONFIRMATION CODE', margin + 8, y + 8);
-    doc.setFontSize(16);
-    doc.text(formSnapshot.code || '----', margin + 8, y + 18);
+    doc.setFillColor(247,240,227); doc.roundedRect(margin,y,contentW,22,3,3,'F');
+    doc.setTextColor(158,114,32); doc.setFontSize(9); doc.setFont('helvetica','bold');
+    doc.text('GIFT BAG CODE', margin+8, y+8);
+    doc.setFontSize(16); doc.text(formSnapshot.code||'----', margin+8, y+18);
     y += 30;
 
-    // Meta info
-    doc.setFillColor(244, 243, 240);
-    doc.roundedRect(margin, y, contentW, 28, 2, 2, 'F');
-    doc.setTextColor(106, 103, 96);
-    doc.setFontSize(8);
-    doc.setFont('helvetica', 'normal');
-    doc.text('DATE', margin + 6, y + 8);
-    doc.text('TRAINER', margin + 50, y + 8);
-    doc.text('PARTICIPANT', margin + 110, y + 8);
-    doc.setTextColor(26, 26, 26);
-    doc.setFontSize(10);
-    doc.setFont('helvetica', 'bold');
-    doc.text(formSnapshot.date || '-', margin + 6, y + 17);
-    doc.text(formSnapshot.trainer || '-', margin + 50, y + 17);
-    doc.text(formSnapshot.participant || 'Anonymous', margin + 110, y + 17);
+    doc.setFillColor(244,243,240); doc.roundedRect(margin,y,contentW,28,2,2,'F');
+    doc.setTextColor(106,103,96); doc.setFontSize(8); doc.setFont('helvetica','normal');
+    doc.text('DATE', margin+6, y+8); doc.text('TRAINER', margin+55, y+8); doc.text('PARTICIPANT', margin+120, y+8);
+    doc.setTextColor(26,26,26); doc.setFontSize(10); doc.setFont('helvetica','bold');
+    doc.text(formSnapshot.date||'-', margin+6, y+17);
+    doc.text(formSnapshot.trainer||'-', margin+55, y+17);
+    doc.text(formSnapshot.participant||'Anonymous', margin+120, y+17);
     y += 36;
 
-    // Topic
-    doc.setFillColor(13, 27, 42);
-    doc.roundedRect(margin, y, contentW, 14, 2, 2, 'F');
-    doc.setTextColor(201, 151, 58);
-    doc.setFontSize(8);
-    doc.setFont('helvetica', 'bold');
-    doc.text('TRAINING TOPIC', margin + 6, y + 6);
-    doc.setTextColor(255, 255, 255);
-    doc.setFontSize(9);
-    doc.text(formSnapshot.topic || '-', margin + 6, y + 11.5);
-    y += 22;
-
-    var sectionLabels = {
-      s1: 'Section 1: Training Content',
-      s2: 'Section 2: Trainer Evaluation',
-      s3: 'Section 3: Training Experience',
-      s4: 'Section 4: Overall Impression'
-    };
+    doc.setFillColor(13,27,42); doc.roundedRect(margin,y,contentW,18,2,2,'F');
+    doc.setTextColor(201,151,58); doc.setFontSize(8); doc.setFont('helvetica','bold');
+    doc.text('TRAINING TOPIC(S)', margin+6, y+7);
+    doc.setTextColor(255,255,255); doc.setFontSize(9);
+    var topicLines = doc.splitTextToSize(formSnapshot.topics||'-', contentW-12);
+    doc.text(topicLines[0], margin+6, y+14);
+    y += 24;
 
     ratingSections.forEach(function(sec) {
       checkPage(20);
-      doc.setFillColor(13, 27, 42);
-      doc.rect(margin, y, contentW, 10, 'F');
-      doc.setFillColor(201, 151, 58);
-      doc.rect(margin, y + 10, contentW, 1, 'F');
-      doc.setTextColor(255, 255, 255);
-      doc.setFontSize(9);
-      doc.setFont('helvetica', 'bold');
-      doc.text(sectionLabels[sec.id].toUpperCase(), margin + 6, y + 7);
+      doc.setFillColor(13,27,42); doc.rect(margin,y,contentW,10,'F');
+      doc.setFillColor(201,151,58); doc.rect(margin,y+10,contentW,1,'F');
+      doc.setTextColor(255,255,255); doc.setFontSize(9); doc.setFont('helvetica','bold');
+      doc.text(('Section '+sec.num+': '+sec.title).toUpperCase(), margin+6, y+7);
       y += 14;
-
-      sec.items.forEach(function(item, ri) {
+      formSnapshot.sections[sec.id].items.forEach(function(item, ri) {
         checkPage(10);
-        var rating = formSnapshot[sec.id][ri].val;
-        doc.setFillColor(ri % 2 === 0 ? 250 : 244, ri % 2 === 0 ? 250 : 243, ri % 2 === 0 ? 248 : 240);
-        doc.rect(margin, y, contentW, 9, 'F');
-        doc.setTextColor(74, 72, 69);
-        doc.setFontSize(8);
-        doc.setFont('helvetica', 'normal');
-        var lines = doc.splitTextToSize(item, contentW - 30);
-        doc.text(lines[0], margin + 4, y + 6);
-        // Rating circles
-        for (var v = 1; v <= 5; v++) {
-          var cx = pageW - margin - (5 - v) * 9 - 4;
-          if (parseInt(rating) === v) {
-            doc.setFillColor(201, 151, 58);
-            doc.circle(cx, y + 4.5, 3.5, 'F');
-            doc.setTextColor(255, 255, 255);
-          } else {
-            doc.setFillColor(232, 230, 225);
-            doc.circle(cx, y + 4.5, 3.5, 'F');
-            doc.setTextColor(160, 156, 150);
-          }
-          doc.setFontSize(7);
-          doc.setFont('helvetica', 'bold');
-          doc.text(String(v), cx - 1.5, y + 6.2);
+        doc.setFillColor(ri%2===0?250:244, ri%2===0?250:243, ri%2===0?248:240);
+        doc.rect(margin,y,contentW,9,'F');
+        doc.setTextColor(74,72,69); doc.setFontSize(8); doc.setFont('helvetica','normal');
+        var lines = doc.splitTextToSize(item.label, contentW-36);
+        doc.text(lines[0], margin+4, y+6);
+        for (var v=1;v<=5;v++) {
+          var cx = pageW-margin-(5-v)*9-4;
+          if (parseInt(item.val)===v) { doc.setFillColor(201,151,58); doc.circle(cx,y+4.5,3.5,'F'); doc.setTextColor(255,255,255); }
+          else { doc.setFillColor(232,230,225); doc.circle(cx,y+4.5,3.5,'F'); doc.setTextColor(160,156,150); }
+          doc.setFontSize(7); doc.setFont('helvetica','bold'); doc.text(String(v),cx-1.5,y+6.2);
         }
         y += 9;
       });
       y += 6;
     });
 
-    // Open feedback
     checkPage(20);
-    doc.setFillColor(13, 27, 42);
-    doc.rect(margin, y, contentW, 10, 'F');
-    doc.setFillColor(201, 151, 58);
-    doc.rect(margin, y + 10, contentW, 1, 'F');
-    doc.setTextColor(255, 255, 255);
-    doc.setFontSize(9);
-    doc.setFont('helvetica', 'bold');
-    doc.text('SECTION 5: OPEN FEEDBACK', margin + 6, y + 7);
+    doc.setFillColor(13,27,42); doc.rect(margin,y,contentW,10,'F');
+    doc.setFillColor(201,151,58); doc.rect(margin,y+10,contentW,1,'F');
+    doc.setTextColor(255,255,255); doc.setFontSize(9); doc.setFont('helvetica','bold');
+    doc.text('SECTION 5: OPEN FEEDBACK', margin+6, y+7);
     y += 16;
 
-    var openQs = [
-      { q: 'Most helpful about trainer\'s delivery style:', a: formSnapshot.q_helpful },
-      { q: 'What the trainer could improve:', a: formSnapshot.q_improve },
-      { q: 'Suggestions for improving the training:', a: formSnapshot.q_suggest }
-    ];
-    openQs.forEach(function(oq) {
+    [{q:'Most helpful about delivery style:', a:formSnapshot.q_helpful},
+     {q:'What the trainer could improve:', a:formSnapshot.q_improve},
+     {q:'Suggestions for improving training:', a:formSnapshot.q_suggest}
+    ].forEach(function(oq) {
       checkPage(16);
-      doc.setTextColor(106, 103, 96);
-      doc.setFontSize(8);
-      doc.setFont('helvetica', 'bold');
-      doc.text(oq.q, margin, y);
-      y += 5;
-      doc.setTextColor(26, 26, 26);
-      doc.setFont('helvetica', 'normal');
-      var lines = doc.splitTextToSize(oq.a || '-', contentW);
+      doc.setTextColor(106,103,96); doc.setFontSize(8); doc.setFont('helvetica','bold');
+      doc.text(oq.q, margin, y); y += 5;
+      doc.setTextColor(26,26,26); doc.setFont('helvetica','normal');
+      var lines = doc.splitTextToSize(oq.a||'-', contentW);
       doc.text(lines, margin, y);
-      y += lines.length * 5 + 8;
+      y += lines.length*5 + 8;
     });
 
-    // Footer
-    doc.setFillColor(13, 27, 42);
-    doc.rect(0, 285, 210, 12, 'F');
-    doc.setTextColor(201, 151, 58);
-    doc.setFontSize(7);
-    doc.setFont('helvetica', 'normal');
-    doc.text('Wegagen Bank  ·  IIT Training Feedback  ·  June 2026  ·  Code: ' + (formSnapshot.code || ''), margin, 292);
+    doc.setFillColor(13,27,42); doc.rect(0,285,210,12,'F');
+    doc.setTextColor(201,151,58); doc.setFontSize(7); doc.setFont('helvetica','normal');
+    doc.text('Wegagen Bank  ·  IIT Training  ·  June 2026  ·  t.me/IIT2026alumni  ·  Code: '+(formSnapshot.code||''), margin, 292);
 
-    doc.save('Wegagen-IIT-Feedback-' + (formSnapshot.code || 'receipt') + '.pdf');
-  } catch(err) {
-    alert('PDF generation failed: ' + err.message);
-  }
-
-  btn.textContent = 'Download PDF Receipt';
+    doc.save('Wegagen-IIT-Feedback-'+(formSnapshot.code||'receipt')+'.pdf');
+  } catch(err) { alert('PDF error: '+err.message); }
+  btn.textContent = '⬇ Download PDF Receipt';
   btn.disabled = false;
 }
 
@@ -1021,8 +1029,9 @@ function resetForm() {
   document.getElementById('feedback-form').reset();
   document.getElementById('f-date').valueAsDate = new Date();
   document.getElementById('confirm-screen').style.display = 'none';
-  document.querySelectorAll('.section-card, .meta-card').forEach(function(c) { c.style.display = ''; });
-  document.querySelector('.submit-wrap').style.display = 'flex';
+  document.getElementById('other-wrap').classList.remove('visible');
+  document.querySelectorAll('.section-card, .meta-card').forEach(function(c){ c.style.display=''; });
+  document.getElementById('submit-wrap').style.display = 'flex';
   document.getElementById('submit-btn').disabled = false;
   document.getElementById('submit-btn').textContent = 'Submit Feedback →';
   document.getElementById('topic-error').style.display = 'none';
